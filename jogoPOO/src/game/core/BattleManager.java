@@ -6,7 +6,7 @@ import game.questions.QuestionBank;
 import game.questions.Question;
 import game.utils.InputHandler;
 
-// Controla o fluxo de uma batalha completa, rodando turnos até que alguém seja derrotado
+//Controla o fluxo do programa de auditório, rodando as rodadas de perguntas até que alguém fique coberto de torta (HP chegue a zero)
 public class BattleManager {
     private Player jogador;
     private Enemy inimigo;
@@ -25,21 +25,21 @@ public class BattleManager {
     }
 
     public void iniciarBatalha() {
-        System.out.println("\n BATALHA INICIADA: " + jogador.getNomeUsuario() + " VS " + inimigo.getPersonagem().getNomePersonagem());
+        System.out.println("\nO SHOW VAI COMEÇAR: " + jogador.getNomeUsuario() + " VS " + inimigo.getPersonagem().getNomePersonagem());
         
-        // Loop principal da batalha: continua enquanto ambos estiverem vivos
+        // Loop principal da batalha: continua enquanto ambos estiverem vivos (com resistência)
         while (jogador.getPersonagemSelecionado().estaVivo() && inimigo.getPersonagem().estaVivo()) {
             
             // Puxa uma pergunta aleatória do banco de perguntas
             Question perguntaAtual = bancoDePerguntas.getPerguntaAleatoria();
             
-            // Salva o HP do inimigo antes da rodada para saber se o jogador acertou a pergunta
+            // Salva a resistência (HP) do inimigo antes da rodada para saber se o jogador acertou a pergunta
             int hpInimigoAntes = inimigo.getPersonagem().getHp();
             
             // Roda o turno
             rodada.jogarRodada(jogador, inimigo, perguntaAtual);
 
-            // Se o inimigo tomou dano (HP diminuiu), o jogador ganha pontos
+            // Se o inimigo tomou dano (HP diminuiu / levou torta), o jogador ganha pontos
             if (inimigo.getPersonagem().getHp() < hpInimigoAntes) {
                 // Multiplica a dificuldade da pergunta por 10 para dar os pontos
                 score.adicionarPontos(10 * perguntaAtual.getDificuldade());
@@ -53,10 +53,10 @@ public class BattleManager {
         input.imprimirLinha();
         // Verifica quem sobreviveu para declarar o vencedor
         if (jogador.getPersonagemSelecionado().estaVivo()) {
-            System.out.println("VITÓRIA! Você derrotou o inimigo!");
+            System.out.println("VITÓRIA! O adversário está completamente coberto de torta! Você venceu!");
             System.out.println("Pontuação final: " + score.getPontuacaoTotal());
         } else {
-            System.out.println("DERROTA... Você perdeu toda sua energia.");
+            System.out.println("DERROTA... Você levou tanta torta que não consegue nem enxergar. Fim de jogo!");
         }
         input.imprimirLinha();
     }
