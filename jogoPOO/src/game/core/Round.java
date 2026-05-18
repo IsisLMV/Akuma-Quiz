@@ -5,7 +5,7 @@ import game.characters.Enemy;
 import game.questions.Question;
 import game.utils.InputHandler;
 
-// Representa uma rodada única da batalha (uma pergunta e seu resultado)
+// Representa uma rodada única do programa (uma pergunta e a consequente tortada)
 public class Round {
     private InputHandler input;
 
@@ -16,10 +16,10 @@ public class Round {
 
     public void jogarRodada(Player jogador, Enemy inimigo, Question pergunta) {
         input.imprimirLinha();
-        System.out.println("--- NOVA RODADA ---");
-        // Mostra o HP atual dos personagens usando os getters criados
-        System.out.println("HP " + jogador.getNomeUsuario() + ": " + jogador.getPersonagemSelecionado().getHp() + 
-                           " | HP Inimigo: " + inimigo.getPersonagem().getHp());
+        System.out.println("--- NOVA PERGUNTA ---");
+        
+        System.out.println("Resistência de " + jogador.getNomeUsuario() + ": " + jogador.getPersonagemSelecionado().getHp() + 
+                           " | Resistência do Adversário: " + inimigo.getPersonagem().getHp());
         input.imprimirLinha();
 
         // Exibe o enunciado e as alternativas
@@ -30,12 +30,12 @@ public class Round {
 
         // Lógica do jogo
         if (pergunta.verificarResposta(resposta)) {
-            System.out.println("\n Resposta Correta!");
-            System.out.println("Você atacou o inimigo!");
+            System.out.println("\nResposta Correta!");
+            System.out.println("POU! Você jogou uma TORTA NA CARA do adversário!");
             jogador.getPersonagemSelecionado().atacar(inimigo.getPersonagem());
         } else {
-            System.out.println("\n Resposta Errada! A resposta certa era: " + pergunta.getRespostaCerta());
-            System.out.println("O inimigo aproveitou sua falha e atacou você!");
+            System.out.println("\nResposta Errada! A resposta certa era: " + pergunta.getRespostaCerta());
+            System.out.println("SPLASH! O adversário aproveitou que você errou e encheu sua cara de chantilly!");
             inimigo.getPersonagem().atacar(jogador.getPersonagemSelecionado());
         }
         
