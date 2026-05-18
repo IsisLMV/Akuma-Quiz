@@ -7,7 +7,7 @@ import game.characters.PersonagemAlternativo;
 import game.questions.QuestionBank;
 import game.utils.InputHandler;
 
-// Classe principal que inicializa as dependências e roda o fluxo global do CodeArena
+//Classe principal que inicializa as dependências e roda o fluxo global do Show do Conhecimento
 public class Game {
 
     public static void main(String[] args) {
@@ -18,15 +18,15 @@ public class Game {
 
         // 2. Tela de Boas-vindas
         input.imprimirLinha();
-        System.out.println("Bem-vindo ao CodeArena: Batalha do Conhecimento!");
+        System.out.println("Bem-vindo ao Show do Conhecimento: Edição Torta na Cara!");
         input.imprimirLinha();
 
         String nome = input.lerString("Digite seu nome de jogador:");
 
         // 3. Escolha de Personagem (Usando Polimorfismo)
-        System.out.println("\nEscolha sua classe:");
-        System.out.println("1 - Personagem Básico (HP: 100, Atq: 20, Def: 10)");
-        System.out.println("2 - Personagem Alternativo (HP: 80, Atq: 30, Def: 5)");
+        System.out.println("\nEscolha seu participante:");
+        System.out.println("1 - Participante Padrão (Resistência: 100, Tamanho da Torta: 20, Esquiva: 10)");
+        System.out.println("2 - Participante Ágil (Resistência: 80, Tamanho da Torta: 30, Esquiva: 5)");
         int escolha = input.lerInteiro("Sua escolha:", 1, 2);
 
         game.characters.Character personagemEscolhido; // Declarando pela superclasse
@@ -47,7 +47,7 @@ public class Game {
         batalha.iniciarBatalha();
 
         // 6. Fim de jogo
-        System.out.println("\nObrigado por jogar CodeArena!");
+        System.out.println("\nObrigado por participar do Show do Conhecimento! Limpe o chantilly do rosto e volte sempre!");
         input.fechar(); // Lembrar de fechar o Scanner
     }
 }
