@@ -6,7 +6,7 @@ import game.questions.QuestionBank;
 import game.questions.Question;
 import game.utils.InputHandler;
 
-//Controla o fluxo do programa de auditório, rodando as rodadas de perguntas até que alguém fique coberto de torta (HP chegue a zero)
+//Controla o fluxo do programa, rodando as rodadas de perguntas até que alguém fique coberto de torta (HP chegue a zero)
 public class BattleManager {
     private Player jogador;
     private Enemy inimigo;
