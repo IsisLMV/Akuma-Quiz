@@ -39,7 +39,6 @@ public class Game {
         // 4. Criação do Jogador e do Inimigo
         Player jogador = new Player(nome, personagemEscolhido);
         
-        // Vamos criar um inimigo usando o PersonagemBasico para esta primeira batalha
         Enemy inimigo = new Enemy(new PersonagemBasico());
 
         // 5. Instanciando e iniciando a batalha
@@ -48,6 +47,6 @@ public class Game {
 
         // 6. Fim de jogo
         System.out.println("\nObrigado por participar do Show do Conhecimento! Limpe o chantilly do rosto e volte sempre!");
-        input.fechar(); // Lembrar de fechar o Scanner
+        input.fechar();
     }
 }
