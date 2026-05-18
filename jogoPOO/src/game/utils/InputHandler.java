@@ -9,18 +9,15 @@ public class InputHandler {
         this.scanner = new Scanner(System.in);
     }
 
-    /**
-     * Lê uma string simples (como o nome do jogador ou uma resposta V/F).
-     */
+    //Lê uma string simples (como o nome do jogador ou uma resposta V/F)
+    
     public String lerString(String mensagem) {
         System.out.print(mensagem + " ");
         return scanner.nextLine().trim();
     }
 
-    /**
-     * Lê um número inteiro garantindo que o programa não quebre se o usuário digitar uma letra.
-     * Útil para menus e escolhas de alternativas (1, 2, 3...).
-     */
+    //Lê um número inteiro garantindo que o programa não quebre se o usuário digitar uma letra
+    
     public int lerInteiro(String mensagem, int min, int max) {
         int escolha = -1;
         boolean valido = false;
@@ -41,23 +38,19 @@ public class InputHandler {
         return escolha;
     }
 
-    /**
-     * Pausa o jogo até o jogador apertar ENTER.
-     * Excelente para dar tempo do jogador ler o resultado de um ataque antes da próxima rodada.
-     */
+    //Pausa o jogo até o jogador apertar ENTER
+    
     public void esperarEnter() {
         System.out.println("\nPressione [ENTER] para continuar...");
         scanner.nextLine();
     }
 
-    /**
-     * Imprime uma linha divisória para deixar o console mais organizado.
-     */
+    //Imprime uma linha divisória para deixar o console mais organizado
     public void imprimirLinha() {
         System.out.println("--------------------------------------------------");
     }
 
-    // Fecha o scanner quando o jogo acabar (boa prática de programação)
+    // Fecha o scanner quando o jogo acabar
     public void fechar() {
         if (scanner != null) {
             scanner.close();
