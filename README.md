@@ -2,7 +2,7 @@
 
 (README em andamento)
 
-*Descrição do jogo será adicionada depois de definirmos o tema e das mecânicas finais*
+*Descrição do jogo será adicionada depois de definirmos o tema e as mecânicas finais*
 
 ## Como executar
 
