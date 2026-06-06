@@ -16,7 +16,7 @@ classDiagram
 %% =====================================================
 %% PACOTE CHARACTERS - PERSONAGENS
 %% =====================================================
-
+namespace characters {
     class Character {
         <<abstract>>
         # nomePersonagem : String
@@ -48,11 +48,11 @@ classDiagram
 
 Player --> Character
 Enemy --> Character
-
+}
 %% =====================================================
 %% PACOTE QUESTIONS - PERGUNTAS
 %% =====================================================
-
+namespace questions {
     class Question {
         <<abstract>>
         # enunciado : String
@@ -79,10 +79,11 @@ Enemy --> Character
     }
 
     QuestionBank "1" o-- "*" Question
-
+}
 %% =====================================================
 %% PACOTE CORE
 %% =====================================================
+namespace core {
     class Game {
 	+ main() void
     }
@@ -119,11 +120,11 @@ Enemy --> Character
     Round "1" --> "1" Question
     Round --> Player
     Round --> Enemy
-
+}
 %% =====================================================
 %% PACOTE UTILS
 %% =====================================================
-
+namespace utils {
     class InputHandler {
 	- scanner : Scanner
         + lerString() String
@@ -137,7 +138,7 @@ Enemy --> Character
 BattleManager ..> InputHandler
 Round ..> InputHandler
 Game ..> InputHandler
-
+}
 %% =====================================================
 %% PACOTE ABILITIES
 %% =====================================================
