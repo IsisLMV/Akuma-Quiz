@@ -10,7 +10,13 @@
 ## UML - Diagrama de classe
 Organização visual da arquitetura do nosso projeto:
 
+```mermaid
 classDiagram
+
+%% =====================================================
+%% PACOTE CHARACTERS - PERSONAGENS
+%% =====================================================
+
     class Character {
         <<abstract>>
         # nomePersonagem : String
@@ -21,10 +27,13 @@ classDiagram
 	+ receberDano(dano:int) int
 	+ atacar(alvo:Character) void
     }
+
     class PersonagemBasico
     class PersonagemAlternativo
+
     Character <|-- PersonagemBasico
     Character <|-- PersonagemAlternativo
+
     class Player {
         - nomeUsuario : String
         - pontuacao : int
@@ -32,11 +41,18 @@ classDiagram
         + selecionarPersonagem()
         + responderPergunta()
     }
+
     class Enemy {
     - personagemInimigo : Character
     }
+
 Player --> Character
 Enemy --> Character
+
+%% =====================================================
+%% PACOTE QUESTIONS - PERGUNTAS
+%% =====================================================
+
     class Question {
         <<abstract>>
         # enunciado : String
@@ -46,21 +62,31 @@ Enemy --> Character
    	+ exibirPergunta() void
     	+ exibirAlternativas() void
     }
+
     class MultipleChoiceQuestion {
         - alternativas : String[]
     }
+
     class TrueFalseQuestion
+
     Question <|-- MultipleChoiceQuestion
     Question <|-- TrueFalseQuestion
+
     class QuestionBank {
         - perguntas : ArrayList<Question>
 	- carregarPergunta() void
         + getPerguntaAleatoria() Question
     }
+
     QuestionBank "1" o-- "*" Question
+
+%% =====================================================
+%% PACOTE CORE
+%% =====================================================
     class Game {
 	+ main() void
     }
+    
     class BattleManager {
     	- jogador : Player
    	- inimigo : Enemy
@@ -71,23 +97,33 @@ Enemy --> Character
         + iniciarBatalha() void
 	- finalizarBatalha() void
     }
+
     class Round {
 	- input : InputHandler
         + jogarRodada() void
     }
+
     class ScoreSystem {
         - pontuacaoTotal : int
         + adicionarPontos() void
     }
+
     Game --> BattleManager
+
     BattleManager --> Player
     BattleManager --> Enemy
     BattleManager --> QuestionBank
     BattleManager --> ScoreSystem
     BattleManager --> Round
+
     Round "1" --> "1" Question
     Round --> Player
     Round --> Enemy
+
+%% =====================================================
+%% PACOTE UTILS
+%% =====================================================
+
     class InputHandler {
 	- scanner : Scanner
         + lerString() String
@@ -96,11 +132,21 @@ Enemy --> Character
 	+ imprimirLinha() void
 	+ fechar() void
     }
+
+
 BattleManager ..> InputHandler
 Round ..> InputHandler
 Game ..> InputHandler
+
+%% =====================================================
+%% PACOTE ABILITIES
+%% =====================================================
+
 namespace abilities {
+
     class Ability {
         <<future feature>>
     }
+
 }
+```
