@@ -25,7 +25,7 @@ public class BattleManager {
     }
 
     public void iniciarBatalha() {
-        System.out.println("\nO SHOW VAI COMEÇAR: " + jogador.getNomeUsuario() + " VS " + inimigo.getPersonagem().getNomePersonagem());
+        System.out.println("\nBATALHA EM ANDAMENTO: " + jogador.getNomeUsuario() + " VS " + inimigo.getPersonagem().getNomePersonagem());
         
         // Loop principal da batalha: continua enquanto ambos estiverem vivos (com resistência)
         while (jogador.getPersonagemSelecionado().estaVivo() && inimigo.getPersonagem().estaVivo()) {
@@ -53,10 +53,10 @@ public class BattleManager {
         input.imprimirLinha();
         // Verifica quem sobreviveu para declarar o vencedor
         if (jogador.getPersonagemSelecionado().estaVivo()) {
-            System.out.println("VITÓRIA! O adversário está completamente coberto de torta! Você venceu!");
+            System.out.println("VITÓRIA! Você derrotou o vilão akumatizado e salvou a cidade!");
             System.out.println("Pontuação final: " + score.getPontuacaoTotal());
         } else {
-            System.out.println("DERROTA... Você levou tanta torta que não consegue nem enxergar. Fim de jogo!");
+            System.out.println("DERROTA... Fim de jogo!");
         }
         input.imprimirLinha();
     }

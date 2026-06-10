@@ -1,4 +1,4 @@
-/*Representa uma rodada única do programa (uma pergunta e a consequente tortada)*/
+/*Representa uma rodada única do programa (uma pergunta e o consequente ataque)*/
 package game.core;
 
 import game.characters.Player;
@@ -33,13 +33,34 @@ public class Round {
         if (pergunta instanceof TimedQuestion) {
             TimedQuestion perguntaComTempo = (TimedQuestion) pergunta;
         
-            System.out.println("⚠️ PERGUNTA RELÂMPAGO ⚠️");
+            System.out.println("!! PERGUNTA RELÂMPAGO !!");
             System.out.println("Tempo limite: "+ perguntaComTempo.getTempoLimite()+ " segundos");
+        }
+
+        if (jogador.getPersonagemSelecionado().getHabilidade() != null) {
+
+            System.out.println("\nHabilidade disponível:");
+            System.out.println("★ " + jogador.getPersonagemSelecionado().getHabilidade().getNome());
+
+            System.out.println("Deseja usar a habilidade?");
+            System.out.println("1 - Sim");
+            System.out.println("2 - Não");
+
+            int escolha = input.lerInteiro("Escolha", 1, 2);
+
+            if (escolha == 1) {
+
+                if (jogador.getPersonagemSelecionado().getHabilidade().podeUsar()) {
+                    jogador.getPersonagemSelecionado().getHabilidade().ativar(jogador, inimigo);
+                } else {
+                    System.out.println("Essa habilidade não possui mais usos.");
+                }
+            }
         }
 
         //lê a resposta do jogador e, se preciso, calcula o tempo
         long tempoInicio = System.currentTimeMillis();
-        String resposta = input.lerString("\nSua resposta:");
+        String resposta = input.lerString("\nSua resposta para questão:");
         long tempoFim = System.currentTimeMillis();
         long tempoGasto = (tempoFim - tempoInicio) / 1000;
         boolean acertou = pergunta.verificarResposta(resposta);
@@ -55,11 +76,11 @@ public class Round {
         // Lógica do jogo
         if (acertou) {
             System.out.println("\nResposta Correta!");
-            System.out.println("POU! Você jogou uma TORTA NA CARA do adversário!");
+            System.out.println("POU! Você atacou o adversário!");
             jogador.getPersonagemSelecionado().atacar(inimigo.getPersonagem());
         } else {
             System.out.println("\nResposta Errada! A resposta certa era: " + pergunta.getRespostaCerta());
-            System.out.println("SPLASH! O adversário aproveitou que você errou e encheu sua cara de chantilly!");
+            System.out.println("UI! O adversário aproveitou que você errou e te acertou!");
             inimigo.getPersonagem().atacar(jogador.getPersonagemSelecionado());
         }
         

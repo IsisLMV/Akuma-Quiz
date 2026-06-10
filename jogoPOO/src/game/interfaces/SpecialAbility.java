@@ -1,4 +1,4 @@
-package game.abilities;
+package game.interfaces;
 
 import game.characters.Player;
 import game.characters.Enemy;

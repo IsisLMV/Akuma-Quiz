@@ -11,8 +11,8 @@ public class HealAbility extends Ability {
     @Override
     public void ativar(Player heroi, Enemy akumatizado) {
         System.out.println("\n🐞 MIRACULOUS LADYBUG!");
-        System.out.println("As joaninhas mágicas consertaram os danos! Você recuperou 30 de vida.");
-        // heroi.getPersonagemSelecionado().recuperarVida(30); // Lembre de criar este método no Character
+        heroi.getPersonagemSelecionado().recuperarVida(300);
+        System.out.println("As joaninhas mágicas consertaram os danos! Você recuperou 300 pontos de vida.");
         consumirUso();
     }
 }

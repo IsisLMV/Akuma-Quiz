@@ -11,6 +11,7 @@ public class DoubleDamageAbility extends Ability {
     @Override
     public void ativar(Player heroi, Enemy akumatizado) {
         System.out.println("\n🐾 CATACLISMO!");
+        heroi.getPersonagemSelecionado().ativarDanoDobrado();
         System.out.println("O poder da destruição foi ativado! Seu próximo acerto causará o dobro de dano no akumatizado!");
         // heroi.getPersonagemSelecionado().setDobrarProximoDano(true); // Precisará de uma flag booleana na classe Character
         consumirUso();

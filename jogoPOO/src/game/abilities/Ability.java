@@ -2,6 +2,7 @@ package game.abilities;
 
 import game.characters.Player;
 import game.characters.Enemy;
+import game.interfaces.SpecialAbility;
 
 /**
  * Classe base para todas as habilidades. Controle do limite de usos.

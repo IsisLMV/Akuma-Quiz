@@ -10,9 +10,9 @@ public class ShieldAbility extends Ability {
 
     @Override
     public void ativar(Player heroi, Enemy akumatizado) {
-        System.out.println("\n🐢 CASULO!");
+        System.out.println("\n🐢 PROTEÇÃO!");
+        heroi.getPersonagemSelecionado().ativarEscudo();
         System.out.println("Um campo de força verde protege você. O próximo erro não causará dano!");
-        // heroi.getPersonagemSelecionado().setEscudoAtivo(true);
         consumirUso();
     }
 }
