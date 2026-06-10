@@ -12,9 +12,12 @@ public abstract class Character {
     protected int defesa;
     protected int hpMaximo;
     protected Ability habilidade;
-    //atributos de estado/efeito temporário (nem todos precisam ativar)
-    protected boolean escudoAtivo;
-    protected boolean danoDobrado;
+    //atributos de estado/efeito temporário para as habilidades (nem todos precisam ativar)
+    protected boolean escudoAtivo; //Carapace
+    protected boolean danoDobrado; //Cat Noir
+    protected boolean segundaChanceAtiva; //Viperion
+    protected boolean tempoCongelado; //Vesperia
+    protected boolean miragemAtiva; //Rena Rouge
     
     //construtor
         public Character(String nome, int hp, int ataque, int defesa) {
@@ -29,20 +32,38 @@ public abstract class Character {
     public boolean estaVivo() {
         return hp > 0;
     }
-    public void atacar(Character alvo) { //usar: inimigo->jogador (mais básico)
-        alvo.receberDano(this.ataque);
-    }
     public void ativarEscudo() {
         escudoAtivo = true;
     }
     public void ativarDanoDobrado() {
         danoDobrado = true;
     }
+    public void ativarSegundaChance() {
+        segundaChanceAtiva = true;
+    }
+    public void desativarSegundaChance() {
+        segundaChanceAtiva = false;
+    }
+    public void ativarTempoCongelado() {
+        tempoCongelado = true;
+    }
+    public void desativarTempoCongelado() {
+        tempoCongelado = false;
+    }
+    public void ativarMiragem() {
+        miragemAtiva = true;
+    }
+    public void desativarMiragem() {
+        miragemAtiva = false;
+    }
     public void recuperarVida(int quantidade) {
         hp += quantidade;
         if (hp > hpMaximo) {
             hp = hpMaximo;
         }
+    }
+    public void atacar(Character alvo) { //usar: inimigo->jogador (mais básico)
+        alvo.receberDano(this.ataque);
     }
     //usar: jogador->inimigo
     public int calcularDano(int dificuldade) {
@@ -92,14 +113,23 @@ public abstract class Character {
     public int getDefesa() {
         return defesa;
     }
+    public Ability getHabilidade() {
+        return habilidade;
+    }
     public boolean isEscudoAtivo() {
         return escudoAtivo;
     }
     public boolean isDanoDobrado() {
         return danoDobrado;
     }
-    public Ability getHabilidade() {
-        return habilidade;
+    public boolean isSegundaChanceAtiva() {
+        return segundaChanceAtiva;
+    }
+    public boolean isTempoCongelado() {
+        return tempoCongelado;
+    }
+    public boolean isMiragemAtiva() {
+        return miragemAtiva;
     }
 
     //setter

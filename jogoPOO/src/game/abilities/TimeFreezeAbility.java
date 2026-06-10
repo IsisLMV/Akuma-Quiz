@@ -1,5 +1,3 @@
-/*Placeholder pra entrega 3*/
-
 package game.abilities;
 
 import game.characters.Player;
@@ -12,9 +10,9 @@ public class TimeFreezeAbility extends Ability {
 
     @Override
     public void ativar(Player heroi, Enemy akumatizado) {
+        heroi.getPersonagemSelecionado().ativarTempoCongelado();
         System.out.println("\n🐝 FERROADA!");
-        System.out.println("O tempo foi paralisado! Você tem tempo infinito para responder a esta pergunta.");
-        // Lógica a ser conectada com a TimedQuestion
+        System.out.println("O cronômetro foi paralisado! Você tem tempo a vontade para responder a esta pergunta.");
         consumirUso();
     }
 }

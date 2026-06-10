@@ -30,12 +30,12 @@ public class Game {
 
         // 3. Escolha de Personagem (Usando Polimorfismo)
         System.out.println("\nEscolha seu participante:");
-        System.out.println("1 - Ladybug (Resistência: 1000, Ataque: 220, Defesa: 50)");
-        System.out.println("2 - Cat Noir (Resistência: 900, Ataque: 300, Defesa: 40)");
-        System.out.println("3 - Carapace (Resistência: 1200, Ataque: 150, Defesa: 80)");
-        System.out.println("4 - Rena Rouge (Resistência: 900, Ataque: 220, Defesa: 40)");
-        System.out.println("5 - Viperion (Resistência: 1000, Ataque: 200, Defesa: 50)");
-        System.out.println("6 - Vesperia (Resistência: 950, Ataque: 250, Defesa: 40)");
+        System.out.println("1 - Ladybug \nResistência: 1000 | Ataque: 220 | Defesa: 50 \nhabilidade: Miraculous Ladybug (regeneração parcial de vida)\n");
+        System.out.println("2 - Cat Noir \nResistência: 900 | Ataque: 300 | Defesa: 40 \nhabilidade: Cataclismo (ataque causa dano dobrado)\n");
+        System.out.println("3 - Carapace \nResistência: 1200 | Ataque: 150 | Defesa: 80 \nhabilidade: Proteção (escudo temporário para bloquear ataque)\n");
+        System.out.println("4 - Rena Rouge \nResistência: 900 | Ataque: 220 | Defesa: 40 \nhabilidade: Realidade (revelar uma alternativa errada)\n");
+        System.out.println("5 - Viperion \nResistência: 1000 | Ataque: 200 | Defesa: 50 \nhabilidade: Segunda chance (segunda tentativa para acertar uma pergunta)\n");
+        System.out.println("6 - Vesperia \nResistência: 950 | Ataque: 250 | Defesa: 40 \nhabilidade: Ferroada (ignora tempo limite de perguntas cronometradas)\n");
         int escolha = input.lerInteiro("Sua escolha:", 1, 6);
 
         game.characters.Character personagemEscolhido; // Declarando pela superclasse

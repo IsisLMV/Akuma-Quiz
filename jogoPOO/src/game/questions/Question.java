@@ -11,7 +11,6 @@ public abstract class Question {
 
     //construtor
     public Question(String enunciado, String respostaCerta, int dificuldade) {
-
         this.enunciado = enunciado;
         this.respostaCerta = respostaCerta;
         this.dificuldade = dificuldade;
@@ -38,7 +37,11 @@ public abstract class Question {
         System.out.println(enunciado);
         exibirAlternativas();
 
+    }    
+    public String obterAlternativaErrada() {
+        return null;
     }
+
     //método abstrato
     public abstract void exibirAlternativas();
 }

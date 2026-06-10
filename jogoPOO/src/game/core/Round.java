@@ -58,6 +58,18 @@ public class Round {
             }
         }
 
+        //habilidade da Rena Rouge
+        if (jogador.getPersonagemSelecionado().isMiragemAtiva()) {
+            String errada = pergunta.obterAlternativaErrada();
+            if (errada != null) {
+                System.out.println("Uma ilusão revelou uma alternativa errada!");
+                System.out.println("A alternativa " + errada + " está errada.");
+            } else {
+                System.out.println("A habilidade não conseguiu ajudar nesse tipo de pergunta.");
+            }
+            jogador.getPersonagemSelecionado().desativarMiragem();
+        }
+
         //lê a resposta do jogador e, se preciso, calcula o tempo
         long tempoInicio = System.currentTimeMillis();
         String resposta = input.lerString("\nSua resposta para questão:");
@@ -65,15 +77,31 @@ public class Round {
         long tempoGasto = (tempoFim - tempoInicio) / 1000;
         boolean acertou = pergunta.verificarResposta(resposta);
 
-        //verificação se a resposta está dentro do tempo
-        if (pergunta instanceof TimedQuestion) {
-        TimedQuestion perguntaComTempo = (TimedQuestion) pergunta;
-        if (tempoGasto > perguntaComTempo.getTempoLimite()) {
-            System.out.println("\nTEMPO ESGOTADO!");
-            acertou = false;
+        //habilidade do Viperion
+        if (!acertou && jogador.getPersonagemSelecionado().isSegundaChanceAtiva()) {
+            System.out.println("\n🐍 SEGUNDA CHANCE!");
+            System.out.println("Você errou, mas sua habilidade te ajudou a voltar no tempo para antes de você errar!");
+            jogador.getPersonagemSelecionado().desativarSegundaChance();
+            tempoInicio = System.currentTimeMillis();
+            resposta = input.lerString("\nTente novamente:");
+            tempoFim = System.currentTimeMillis();
+            tempoGasto = (tempoFim - tempoInicio) / 1000;
+            acertou = pergunta.verificarResposta(resposta);
         }
-    }
-        // Lógica do jogo
+
+        //verificação se a resposta está dentro do tempo e não estava com a habilidade da Vesperia ativa
+        if (pergunta instanceof TimedQuestion && !jogador.getPersonagemSelecionado().isTempoCongelado()) {
+            TimedQuestion perguntaComTempo = (TimedQuestion) pergunta;
+            if (tempoGasto > perguntaComTempo.getTempoLimite()) {
+                System.out.println("\nTEMPO ESGOTADO!");
+                acertou = false;
+            }
+        }
+
+        //voltar a ter cronômetro para quem estiver com a Vesperia
+        jogador.getPersonagemSelecionado().desativarTempoCongelado();
+
+        //lógica de ataques do jogo
         if (acertou) {
             System.out.println("\nResposta Correta!");
             System.out.println("POU! Você atacou o adversário!");

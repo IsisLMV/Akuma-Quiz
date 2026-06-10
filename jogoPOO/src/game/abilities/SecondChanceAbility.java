@@ -1,5 +1,3 @@
-/*Placeholder pra entrega 3*/
-
 package game.abilities;
 
 import game.characters.Player;
@@ -12,9 +10,9 @@ public class SecondChanceAbility extends Ability {
 
     @Override
     public void ativar(Player heroi, Enemy akumatizado) {
+        heroi.getPersonagemSelecionado().ativarSegundaChance();
         System.out.println("\n🐍 SEGUNDA CHANCE!");
-        System.out.println("O ponto de salvamento temporal foi ativado. Se você errar, o tempo voltará para você tentar de novo.");
-        // heroi.setSegundaChance(true);
+        System.out.println("Você poderá tentar responder novamente caso erre a próxima pergunta.");
         consumirUso();
     }
 }
