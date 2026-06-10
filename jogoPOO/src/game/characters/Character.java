@@ -29,6 +29,38 @@ public abstract class Character {
     public boolean estaVivo() {
         return hp > 0;
     }
+    public void atacar(Character alvo) { //usar: inimigo->jogador (mais básico)
+        alvo.receberDano(this.ataque);
+    }
+    public void ativarEscudo() {
+        escudoAtivo = true;
+    }
+    public void ativarDanoDobrado() {
+        danoDobrado = true;
+    }
+    public void recuperarVida(int quantidade) {
+        hp += quantidade;
+        if (hp > hpMaximo) {
+            hp = hpMaximo;
+        }
+    }
+    //usar: jogador->inimigo
+    public int calcularDano(int dificuldade) {
+        int dano = ataque;
+        if (danoDobrado) {
+            dano *= 2;
+            System.out.println(nomePersonagem + " usou dano dobrado!");
+            danoDobrado = false;
+        }
+
+        if (dificuldade == 2) {
+            dano = (int)(dano * 1.5);
+        }
+        if (dificuldade == 3) {
+            dano *= 2;
+        }
+        return dano;
+    }
     public int receberDano(int dano) {
         if (escudoAtivo) {
             escudoAtivo = false;
@@ -45,27 +77,6 @@ public abstract class Character {
             hp = 0;
         }
         return danoReal;
-    }
-    public void atacar(Character alvo) {
-        int danoFinal = ataque;
-        if (danoDobrado) {
-            danoFinal *= 2;
-            System.out.println(nomePersonagem + " usou dano dobrado!");
-            danoDobrado = false;
-        }
-        alvo.receberDano(danoFinal);
-    }
-    public void ativarEscudo() {
-        escudoAtivo = true;
-    }
-    public void ativarDanoDobrado() {
-        danoDobrado = true;
-    }
-    public void recuperarVida(int quantidade) {
-        hp += quantidade;
-        if (hp > hpMaximo) {
-            hp = hpMaximo;
-        }
     }
 
     //getters (importante para a escrever no console/ mostrar na interface)

@@ -77,7 +77,8 @@ public class Round {
         if (acertou) {
             System.out.println("\nResposta Correta!");
             System.out.println("POU! Você atacou o adversário!");
-            jogador.getPersonagemSelecionado().atacar(inimigo.getPersonagem());
+            int dano = jogador.getPersonagemSelecionado().calcularDano(pergunta.getDificuldade());
+            inimigo.getPersonagem().receberDano(dano);
         } else {
             System.out.println("\nResposta Errada! A resposta certa era: " + pergunta.getRespostaCerta());
             System.out.println("UI! O adversário aproveitou que você errou e te acertou!");
