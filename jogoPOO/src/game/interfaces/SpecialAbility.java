@@ -5,7 +5,6 @@ import game.characters.Enemy;
 
 /**
  * Interface que define o contrato para poderes especiais.
- * Atende ao requisito "Uso de interfaces" da Entrega 2.
  */
 public interface SpecialAbility {
     String getNome();
