@@ -246,6 +246,101 @@ public class QuestionBank {
             )
         );
 
+        String[] alternativas16 = {
+            "a) Mercúrio",
+            "b) Vênus",
+            "c) Terra",
+            "d) Marte"
+        };
+        perguntas.add(
+            new TimedMultipleChoiceQuestion(
+                "Qual é o terceiro planeta do Sistema Solar?",
+                "c",
+                1,
+                alternativas16,
+                10
+            )
+        );
+
+        String[] alternativas17 = {
+            "a) 100",
+            "b) 206",
+            "c) 300",
+            "d) 150"
+        };
+        perguntas.add(
+            new TimedMultipleChoiceQuestion(
+                "Quantos ossos possui o corpo humano adulto?",
+                "b",
+                2,
+                alternativas17,
+                8
+            )
+        );
+
+        String[] alternativas18 = {
+            "a) Java",
+            "b) Python",
+            "c) HTML",
+            "d) C"
+        };
+        perguntas.add(
+            new TimedMultipleChoiceQuestion(
+                "Qual destas NÃO é uma linguagem de programação?",
+                "c",
+                2,
+                alternativas18,
+                7
+            )
+        );
+
+        /*Múltiplas alternativas*/
+        String[] alternativas19 = {
+            "a) Java",
+            "b) HTML",
+            "c) Python",
+            "d) CSS"
+        };
+        perguntas.add(
+            new MultipleAnswerQuestion(
+                "Quais destas são linguagens de programação?",
+                "a,c",
+                2,
+                alternativas19
+            )
+        );
+
+        String[] alternativas20 = {
+            "a) Mamífero",
+            "b) Ave",
+            "c) Réptil",
+            "d) Peixe"
+        };
+        perguntas.add(
+            new MultipleAnswerQuestion(
+                "Quais destes grupos possuem espécies que podem voar?",
+                "a,b",
+                2,
+                alternativas20
+            )
+        );
+
+        String[] alternativas21 = {
+            "a) Mercúrio",
+            "b) Marte",
+            "c) Vênus",
+            "d) Júpiter"
+        };
+
+        perguntas.add(
+            new MultipleAnswerQuestion(
+                "Quais destes são planetas rochosos?",
+                "a,b,c",
+                3,
+                alternativas21
+            )
+        );
+
         /*V ou F*/
         perguntas.add(
             new TrueFalseQuestion("Java é uma linguagem orientada a objetos.", "V", 1)
@@ -283,15 +378,23 @@ public class QuestionBank {
         perguntas.add(
             new TrueFalseQuestion("A Amazônia é a maior floresta tropical do mundo.", "V", 2)
         );
-        perguntas.add(
-            new TrueFalseQuestion(
-                "O número pi possui valor exato igual a 3.", "F", 2)
+        perguntas.add(new TrueFalseQuestion("O número pi possui valor exato igual a 3.", "F", 2)
         );
         perguntas.add(
             new TrueFalseQuestion("A linguagem Java foi criada pela Sun Microsystems.", "V", 3)
         );
         perguntas.add(
             new TrueFalseQuestion("O ser humano possui 206 ossos no corpo adulto.", "V", 2)
+        );
+        perguntas.add(
+            new TimedTrueFalseQuestion("A Lua é um planeta.", "F", 1, 8)
+        );
+        perguntas.add(
+            new TimedTrueFalseQuestion(
+                "A velocidade da luz é maior que a velocidade do som.", "V", 2, 6)
+        );
+        perguntas.add(
+            new TimedTrueFalseQuestion("O Brasil possui cinco regiões geográficas.", "V", 1, 8)
         );
     }
 

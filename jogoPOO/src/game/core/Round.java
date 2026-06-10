@@ -1,15 +1,20 @@
+/*Representa uma rodada única do programa (uma pergunta e a consequente tortada)*/
 package game.core;
 
 import game.characters.Player;
 import game.characters.Enemy;
 import game.questions.Question;
 import game.utils.InputHandler;
+import game.interfaces.TimedQuestion;
 
-// Representa uma rodada única do programa (uma pergunta e a consequente tortada)
+/*Para a entrega 2, ainda no console, as perguntas com tempo não estão 100% precisas com a cronometragem*/
+
+
+
 public class Round {
     private InputHandler input;
 
-    // Recebe o InputHandler via construtor para reaproveitar o mesmo Scanner do jogo
+    //Recebe o InputHandler via construtor para reaproveitar o mesmo Scanner do jogo
     public Round(InputHandler input) {
         this.input = input;
     }
@@ -18,18 +23,37 @@ public class Round {
         input.imprimirLinha();
         System.out.println("--- NOVA PERGUNTA ---");
         
-        System.out.println("Resistência de " + jogador.getNomeUsuario() + ": " + jogador.getPersonagemSelecionado().getHp() + 
-                           " | Resistência do Adversário: " + inimigo.getPersonagem().getHp());
+        System.out.println("Resistência de " + jogador.getNomeUsuario() + ": " + jogador.getPersonagemSelecionado().getHp() + " | Resistência do Adversário: " + inimigo.getPersonagem().getHp());
         input.imprimirLinha();
 
         // Exibe o enunciado e as alternativas
         pergunta.exibirPergunta();
-        
-        // Lê a resposta do jogador
-        String resposta = input.lerString("\nSua resposta:");
 
+        //identificaçao de perguntas com tempo (pergunta pela interface) e aviso para os players no terminal
+        if (pergunta instanceof TimedQuestion) {
+            TimedQuestion perguntaComTempo = (TimedQuestion) pergunta;
+        
+            System.out.println("⚠️ PERGUNTA RELÂMPAGO ⚠️");
+            System.out.println("Tempo limite: "+ perguntaComTempo.getTempoLimite()+ " segundos");
+        }
+
+        //lê a resposta do jogador e, se preciso, calcula o tempo
+        long tempoInicio = System.currentTimeMillis();
+        String resposta = input.lerString("\nSua resposta:");
+        long tempoFim = System.currentTimeMillis();
+        long tempoGasto = (tempoFim - tempoInicio) / 1000;
+        boolean acertou = pergunta.verificarResposta(resposta);
+
+        //verificação se a resposta está dentro do tempo
+        if (pergunta instanceof TimedQuestion) {
+        TimedQuestion perguntaComTempo = (TimedQuestion) pergunta;
+        if (tempoGasto > perguntaComTempo.getTempoLimite()) {
+            System.out.println("\nTEMPO ESGOTADO!");
+            acertou = false;
+        }
+    }
         // Lógica do jogo
-        if (pergunta.verificarResposta(resposta)) {
+        if (acertou) {
             System.out.println("\nResposta Correta!");
             System.out.println("POU! Você jogou uma TORTA NA CARA do adversário!");
             jogador.getPersonagemSelecionado().atacar(inimigo.getPersonagem());
