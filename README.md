@@ -303,4 +303,15 @@ Game ..> InputHandler
 
 Ability ..|> SpecialAbility
 
+%% =====================================================
+%% PACOTE INTERFACES
+%% =====================================================
+    class SpecialAbility {
+		<<interface>>
+    }
+
+    class TimedQuestion {
+		<<interface>>
+    }
+
 ```
