@@ -204,7 +204,7 @@ Character o-- Ability
 
     class QuestionBank {
         - perguntas : ArrayList<Question>
-	- carregarPergunta() void
+		- carregarPerguntas() void
         + getPerguntaAleatoria() Question
     }
 
@@ -302,19 +302,5 @@ Game ..> InputHandler
     Ability <|-- TimeFreezeAbility
 
 Ability ..|> SpecialAbility
-
-%% =====================================================
-%% PACOTE INTERFACES
-%% =====================================================
-    interface SpecialAbility {
-		<<interface>>
-    }
-
-    interface TimedQuestion {
-		<<interface>>
-    }
-
-TimedMultipleChoiceQuestion ..|> TimedQuestion
-TimedTrueFalseQuestion ..|> TimedQuestion
 
 ```
