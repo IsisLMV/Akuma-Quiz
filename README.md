@@ -307,15 +307,11 @@ Ability ..|> SpecialAbility
 %% PACOTE INTERFACES
 %% =====================================================
     interface SpecialAbility {
-		getNome() String
-        podeUsar() boolean
-		consumirUso() void
-		ativar(heroi:Player,akumatizado:Enemy) void
+		<<interface>>
     }
 
     interface TimedQuestion {
-		getTempoLimite() int
-        tempoEsgotado(tempoInicio:long) boolean
+		<<interface>>
     }
 
 TimedMultipleChoiceQuestion ..|> TimedQuestion
