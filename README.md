@@ -307,11 +307,16 @@ Ability ..|> SpecialAbility
 %% PACOTE INTERFACES
 %% =====================================================
     class SpecialAbility {
-		<<interface>>
-    }
+		<<Interface>>
+	    + getNome() String
+	    + podeUsar() boolean
+	    + consumirUso() void
+	    + ativar(heroi:Player, akumatizado:Enemy) void
+	}
 
     class TimedQuestion {
-		<<interface>>
+		<<Interface>>
+	    + getTempoLimite() int
+	    + tempoEsgotado(tempoInicio:long) boolean
     }
-
 ```
