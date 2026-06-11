@@ -7,14 +7,17 @@
 ## Como executar
 
 ## Funcionalidades Implementadas
-
-- Sistema de personagens baseado em herança.
-- Sistema de perguntas de múltipla escolha.
-- Sistema de perguntas verdadeiro ou falso.
-- Seleção de personagem.
+- Sistema de personagens baseado em herança e polimorfismo.
+- Seleção de heróis jogáveis.
+- Sistema de inimigos.
 - Sistema de batalhas por rodadas.
-- Controle de pontuação.
-- Banco de perguntas.
+- Sistema de pontuação.
+- Banco de perguntas aleatórias.
+- Perguntas de múltipla escolha.
+- Perguntas de múltiplas respostas.
+- Perguntas de verdadeiro ou falso.
+- Perguntas com tempo limite.
+- Habilidades especiais exclusivas para cada personagem.
 - Interface textual via terminal.
 
 ## Estrutura do Projeto
@@ -31,11 +34,15 @@ Contém as classes responsáveis pelo funcionamento principal do jogo.
 
 ### **`characters`**
 
-Contém as classes relacionadas aos personagens.
+Contém as classes relacionadas aos personagens do jogo.
 
 - `Character` – classe abstrata que define atributos e comportamentos comuns.
-- `PersonagemBasico` – implementação básica de personagem.
-- `PersonagemAlternativo` – implementação alternativa de personagem.
+- `Ladybug` – personagem equilibrada com habilidade de recuperação de vida.
+- `CatNoir` – personagem ofensivo com dano dobrado temporário.
+- `Carapace` – personagem defensivo com escudo protetor.
+- `RenaRouge` – personagem estratégica capaz de revelar uma alternativa incorreta.
+- `Viperion` – personagem que permite uma segunda tentativa de resposta.
+- `Vesperia` – personagem que ignora o limite de tempo de uma pergunta.
 - `Player` – representa o jogador.
 - `Enemy` – representa o oponente.
 
@@ -46,6 +53,9 @@ Responsável pelo sistema de perguntas e respostas.
 - `Question` – classe abstrata base para todas as perguntas.
 - `MultipleChoiceQuestion` – perguntas de múltipla escolha.
 - `TrueFalseQuestion` – perguntas de verdadeiro ou falso.
+- `TimedMultipleChoiceQuestion` – perguntas de múltipla escolha com tempo limite.
+- `TimedTrueFalseQuestion` – perguntas de verdadeiro ou falso com tempo limite.
+- `MultipleAnswerQuestion` – perguntas com múltiplas respostas corretas.
 - `QuestionBank` – armazena e fornece perguntas durante o jogo.
 
 ### **`utils`**
@@ -56,7 +66,15 @@ Contém classes utilitárias utilizadas por diferentes partes do sistema.
 
 ### **`abilities`**
 
-Pacote reservado para futuras habilidades e mecânicas especiais dos personagens.
+Contém as habilidades especiais dos personagens.
+
+- `Ability` – classe abstrata base para habilidades.
+- `HealAbility` – recuperação parcial de vida (Ladybug).
+- `DoubleDamageAbility` – próximo ataque causa dano dobrado (Cat Noir).
+- `ShieldAbility` – bloqueia um ataque recebido (Carapace).
+- `HintAbility` – revela uma alternativa incorreta (Rena Rouge).
+- `SecondChanceAbility` – permite responder novamente após um erro (Viperion).
+- `TimeFreezeAbility` – ignora o limite de tempo de uma pergunta (Vesperia).
 
 ## Justificativas de Design
 O projeto foi desenvolvido seguindo os princípios da Programação Orientada a Objetos, buscando modularidade, reutilização de código e facilidade de manutenção.
@@ -65,7 +83,9 @@ A classe `BattleManager` atua como controlador principal da aplicação, sendo r
 
 Para representar os personagens do jogo foi utilizada uma hierarquia de herança baseada na classe abstrata `Character`, que concentra atributos e comportamentos comuns. Dessa forma, diferentes tipos de personagens podem ser implementados sem duplicação de código.
 
-O sistema de perguntas foi modelado a partir da classe abstrata `Question`, especializada pelas classes `MultipleChoiceQuestion` e `TrueFalseQuestion`. Essa abordagem utiliza polimorfismo e facilita a inclusão de novos tipos de perguntas futuramente.
+Além da hierarquia de personagens, foi criada a hierarquia de habilidades baseada na classe abstrata `Ability`. Cada personagem possui uma habilidade específica implementada em uma subclasse própria, permitindo reutilização de código e aplicação de polimorfismo.
+
+O sistema de perguntas foi modelado a partir da classe abstrata `Question` e expandido para suportar diferentes modalidades de pergunta, incluindo perguntas de múltipla escolha (`MultipleChoiceQuestion`), verdadeiro ou falso (`TrueFalseQuestion`), temporizadas (`TimedMultipleChoiceQuestion` e `TimedTrueFalseQuestion`) e questões com múltiplas respostas corretas (`MultipleAnswerQuestion`), mantendo compatibilidade com a estrutura base fornecida. Essa abordagem utiliza polimorfismo e facilita a inclusão de novos tipos de perguntas futuramente.
 
 O gerenciamento das questões é realizado pela classe `QuestionBank`, responsável por armazenar e disponibilizar perguntas durante a execução do jogo.
 
