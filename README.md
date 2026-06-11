@@ -110,23 +110,49 @@ classDiagram
         # hp : int
         # ataque : int
         # defesa : int
+        # hpMaximo : int
+        # habilidade : Ability
+	# escudoAtivo : boolean
+        # danoDobrado : boolean
+        # segundaChanceAtiva : boolean
+        # tempoCongelado : boolean
+        # miragemAtiva : boolean
    	+ estaVivo() boolean
-	+ receberDano(dano:int) int
+	+ ativarEscudo() void
+	+ ativarDanoDobrado() void
+	+ ativarSegundaChance() void
+	+ desativarSegundaChance() void
+	+ ativarTempoCongelado() void
+	+ desativarTempoCongelado() void
+	+ ativarMiragem() void
+	+ desativarMiragem() void
+	+ recuperarVida(quantidade:int) void
 	+ atacar(alvo:Character) void
+	+ calcularDano(dificuldade:int) int
+	+ receberDano(dano:int) int
     }
 
-    class PersonagemBasico
-    class PersonagemAlternativo
+    class Ladybug
+    class CatNoir
+    class Carapace
+    class RenaRouge
+    class Viperion
+    class Vesperia
+    class VilaoBoss
 
-    Character <|-- PersonagemBasico
-    Character <|-- PersonagemAlternativo
+    Character <|-- Ladybug
+    Character <|-- CatNoir
+    Character <|-- Carapace
+    Character <|-- RenaRouge
+    Character <|-- Viperion
+    Character <|-- Vesperia
+    Character <|-- VilaoBoss
 
     class Player {
         - nomeUsuario : String
         - pontuacao : int
 	- personagemSelecionado : Character
-        + selecionarPersonagem()
-        + responderPergunta()
+        + adicionarPontuacao() void
     }
 
     class Enemy {
@@ -135,6 +161,8 @@ classDiagram
 
 Player --> Character
 Enemy --> Character
+Enemy o-- VilaoBoss
+Character o-- Ability
 
 %% =====================================================
 %% PACOTE QUESTIONS - PERGUNTAS
@@ -146,6 +174,7 @@ Enemy --> Character
         # dificuldade : int
     	+ verificarResposta(respostaJogador:String) boolean
    	+ exibirPergunta() void
+   	+ obterAlternativaErrada() String
     	+ exibirAlternativas() void
     }
 
@@ -153,10 +182,25 @@ Enemy --> Character
         - alternativas : String[]
     }
 
+    class MultipleAnswerQuestion {
+        - alternativas : String[]
+    }
+
     class TrueFalseQuestion
 
+    class TimedMultipleChoiceQuestion {
+        - tempoLimite : int
+    }
+
+    class TimedTrueFalseQuestion {
+        - tempoLimite : int
+    }
+
     Question <|-- MultipleChoiceQuestion
+    Question <|-- MultipleAnswerQuestion
     Question <|-- TrueFalseQuestion
+    MultipleChoiceQuestion <|-- TimedMultipleChoiceQuestion
+    TrueFalseQuestion <|-- TimedTrueFalseQuestion
 
     class QuestionBank {
         - perguntas : ArrayList<Question>
@@ -165,6 +209,9 @@ Enemy --> Character
     }
 
     QuestionBank "1" o-- "*" Question
+
+TimedMultipleChoiceQuestion ..|> TimedQuestion
+TimedTrueFalseQuestion ..|> TimedQuestion
 
 %% =====================================================
 %% PACOTE CORE
@@ -205,6 +252,7 @@ Enemy --> Character
     Round "1" --> "1" Question
     Round --> Player
     Round --> Enemy
+    Round ..> TimedQuestion
 
 %% =====================================================
 %% PACOTE UTILS
@@ -227,6 +275,50 @@ Game ..> InputHandler
 %% PACOTE ABILITIES
 %% =====================================================
     class Ability {
-        <<future feature>>
+        <<abstract>>
+        # nome : String
+        # limiteUsos : int
+        # usosAtuais : int
+    	+ ativar(heroi:Player, akumatizado:Enemy) void
     }
+
+    class HealAbility
+
+    class DoubleDamageAbility
+
+    class ShieldAbility
+
+    class HintAbility
+
+    class SecondChanceAbility
+
+    class TimeFreezeAbility
+
+    Ability <|-- HealAbility
+    Ability <|-- DoubleDamageAbility
+    Ability <|-- ShieldAbility
+    Ability <|-- HintAbility
+    Ability <|-- SecondChanceAbility
+    Ability <|-- TimeFreezeAbility
+
+Ability ..|> SpecialAbility
+
+%% =====================================================
+%% PACOTE INTERFACES
+%% =====================================================
+    interface SpecialAbility {
+	getNome() String
+        podeUsar() boolean
+	consumirUso() void
+	ativar(heroi:Player,akumatizado:Enemy) void
+    }
+
+    interface TimedQuestion {
+	getTempoLimite() int
+        tempoEsgotado(tempoInicio:long) boolean
+    }
+
+TimedMultipleChoiceQuestion ..|> TimedQuestion
+TimedTrueFalseQuestion ..|> TimedQuestion
+
 ```
