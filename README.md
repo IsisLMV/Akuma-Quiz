@@ -112,24 +112,24 @@ classDiagram
         # defesa : int
         # hpMaximo : int
         # habilidade : Ability
-	# escudoAtivo : boolean
+		# escudoAtivo : boolean
         # danoDobrado : boolean
         # segundaChanceAtiva : boolean
         # tempoCongelado : boolean
         # miragemAtiva : boolean
-   	+ estaVivo() boolean
-	+ ativarEscudo() void
-	+ ativarDanoDobrado() void
-	+ ativarSegundaChance() void
-	+ desativarSegundaChance() void
-	+ ativarTempoCongelado() void
-	+ desativarTempoCongelado() void
-	+ ativarMiragem() void
-	+ desativarMiragem() void
-	+ recuperarVida(quantidade:int) void
-	+ atacar(alvo:Character) void
-	+ calcularDano(dificuldade:int) int
-	+ receberDano(dano:int) int
+	   	+ estaVivo() boolean
+		+ ativarEscudo() void
+		+ ativarDanoDobrado() void
+		+ ativarSegundaChance() void
+		+ desativarSegundaChance() void
+		+ ativarTempoCongelado() void
+		+ desativarTempoCongelado() void
+		+ ativarMiragem() void
+		+ desativarMiragem() void
+		+ recuperarVida(quantidade:int) void
+		+ atacar(alvo:Character) void
+		+ calcularDano(dificuldade:int) int
+		+ receberDano(dano:int) int
     }
 
     class Ladybug
@@ -173,8 +173,8 @@ Character o-- Ability
         # respostaCorreta : String
         # dificuldade : int
     	+ verificarResposta(respostaJogador:String) boolean
-   	+ exibirPergunta() void
-   	+ obterAlternativaErrada() String
+   		+ exibirPergunta() void
+   		+ obterAlternativaErrada() String
     	+ exibirAlternativas() void
     }
 
@@ -221,14 +221,14 @@ TimedTrueFalseQuestion ..|> TimedQuestion
     }
     
     class BattleManager {
-    	- jogador : Player
-   	- inimigo : Enemy
-   	- bancoDePerguntas : QuestionBank
-	- input : InputHandler
-   	- score : ScoreSystem
-   	- rodada : Round
+		- jogador : Player
+   		- inimigo : Enemy
+   		- bancoDePerguntas : QuestionBank
+		- input : InputHandler
+   		- score : ScoreSystem
+   		- rodada : Round
         + iniciarBatalha() void
-	- finalizarBatalha() void
+		- finalizarBatalha() void
     }
 
     class Round {
@@ -307,14 +307,14 @@ Ability ..|> SpecialAbility
 %% PACOTE INTERFACES
 %% =====================================================
     interface SpecialAbility {
-	getNome() String
+		getNome() String
         podeUsar() boolean
-	consumirUso() void
-	ativar(heroi:Player,akumatizado:Enemy) void
+		consumirUso() void
+		ativar(heroi:Player,akumatizado:Enemy) void
     }
 
     interface TimedQuestion {
-	getTempoLimite() int
+		getTempoLimite() int
         tempoEsgotado(tempoInicio:long) boolean
     }
 
