@@ -398,10 +398,30 @@ public class QuestionBank {
         );
     }
 
-    // retorna pergunta aleatória
+    //retorna uma pergunta aleatória e tira do banco
     public Question getPerguntaAleatoria() {
         Random random = new Random();
         int indice = random.nextInt(perguntas.size());
-        return perguntas.get(indice);
+        return perguntas.remove(indice);
+    }
+
+    //retorna pergunta aleatória filtrada por dificuldade
+    public Question getPerguntaAleatoriaPorDificuldade(int dificuldade) {
+        ArrayList<Question> perguntasFiltradas = new ArrayList<>();
+        //percorre todas as perguntas para criar uma nova lista filtrada
+        for (Question pergunta : perguntas) {
+            if (pergunta.getDificuldade() == dificuldade) {
+                perguntasFiltradas.add(pergunta);
+            }
+        }
+        if (perguntasFiltradas.isEmpty()) {
+            return null;
+        }
+
+        //sorteio dentro das filtradas
+        Random random = new Random();
+        Question perguntaEscolhida = perguntasFiltradas.get(random.nextInt(perguntasFiltradas.size()));
+        perguntas.remove(perguntaEscolhida); //remove do banco original
+        return perguntaEscolhida;
     }
 }
