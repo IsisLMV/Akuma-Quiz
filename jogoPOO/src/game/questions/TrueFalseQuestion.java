@@ -1,7 +1,6 @@
 package game.questions;
 
 public class TrueFalseQuestion extends Question {
-
     //construtor de Question
     public TrueFalseQuestion(String enunciado, String respostaCerta, int dificuldade) {
         super(enunciado, respostaCerta, dificuldade);

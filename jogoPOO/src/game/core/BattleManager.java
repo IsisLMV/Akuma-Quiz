@@ -39,7 +39,7 @@ public class BattleManager {
             // Roda o turno
             rodada.jogarRodada(jogador, inimigo, perguntaAtual);
 
-            // Se o inimigo tomou dano (HP diminuiu / levou torta), o jogador ganha pontos
+            // Se o inimigo tomou dano (HP diminuiu), o jogador ganha pontos
             if (inimigo.getPersonagem().getHp() < hpInimigoAntes) {
                 // Multiplica a dificuldade da pergunta por 10 para dar os pontos
                 score.adicionarPontos(10 * perguntaAtual.getDificuldade());

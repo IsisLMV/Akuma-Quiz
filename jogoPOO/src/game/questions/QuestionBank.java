@@ -891,8 +891,8 @@ public class QuestionBank {
         };
         perguntas.add(
             new MultipleAnswerQuestion(
-                "Quais destas substâncias são elementos químicos?",
-                "a,b,d",
+                "Quais destas opções são elementos químicos?",
+                "a,b",
                 2,
                 alternativasM72
             )
@@ -1170,7 +1170,8 @@ public class QuestionBank {
         );
     }
 
-    //retorna uma pergunta aleatória e tira do banco
+    //retorna uma pergunta aleatória e tira do banco (vai perder o uso no jogo principal)
+    //se der tempo, criamos outros métodos de jogo
     public Question getPerguntaAleatoria() {
         Random random = new Random();
         int indice = random.nextInt(perguntas.size());
