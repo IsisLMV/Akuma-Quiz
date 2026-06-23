@@ -62,6 +62,21 @@ public abstract class Character {
             hp = hpMaximo;
         }
     }
+    //inportante para o reset e para o início de novas fases
+    public void restaurarEstado() {
+        //restaura vida, usos de habilidade e garante efeitos das habilidades inicialmente desativados
+        this.hp = hpMaximo;
+
+        this.escudoAtivo = false;
+        this.danoDobrado = false;
+        this.segundaChanceAtiva = false;
+        this.tempoCongelado = false;
+        this.miragemAtiva = false;
+
+        if (habilidade != null) {
+            habilidade.resetarUsos();
+        }
+    }
     public void atacar(Character alvo) { //usar: inimigo->jogador (mais básico)
         alvo.receberDano(this.ataque);
     }

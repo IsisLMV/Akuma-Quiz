@@ -1,63 +1,56 @@
+/*Controla o fluxo de batalha de uma fase específica, rodando as rodadas de perguntas até que algum HP chegue a zero*/
 package game.core;
 
 import game.characters.Player;
 import game.characters.Enemy;
-import game.questions.QuestionBank;
 import game.questions.Question;
 import game.utils.InputHandler;
 
-//Controla o fluxo do programa, rodando as rodadas de perguntas até que alguém fique coberto de torta (HP chegue a zero)
 public class BattleManager {
     private Player jogador;
-    private Enemy inimigo;
-    private QuestionBank bancoDePerguntas;
-    private InputHandler input;
+    private Level fase;
+    private Enemy vilao;
     private ScoreSystem score;
     private Round rodada;
 
-    public BattleManager(Player jogador, Enemy inimigo, QuestionBank banco, InputHandler input, ScoreSystem score) {
+    public BattleManager(Player jogador, Level fase, InputHandler input, ScoreSystem score) {
         this.jogador = jogador;
-        this.inimigo = inimigo;
-        this.bancoDePerguntas = banco;
-        this.input = input;
+        this.fase = fase;
+        this.vilao = fase.getVilao();
         this.score = score;
         this.rodada = new Round(input);
     }
 
-    public void iniciarBatalha() {
-        System.out.println("\nBATALHA EM ANDAMENTO: " + jogador.getNomeUsuario() + " VS " + inimigo.getPersonagem().getNomePersonagem());
+    public ResultadoBatalha iniciarBatalha() {
+        System.out.println("\nBATALHA EM ANDAMENTO:\n" + fase.getNome() + ": " + jogador.getNomeUsuario() + " VS " + vilao.getPersonagem().getNomePersonagem());
         
-        // Loop principal da batalha: continua enquanto ambos estiverem vivos (com resistência)
-        while (jogador.getPersonagemSelecionado().estaVivo() && inimigo.getPersonagem().estaVivo()) {
+        //loop principal da batalha: continua as rodadas enquanto jogador estiver vivo (com resistência)
+        while (jogador.getPersonagemSelecionado().estaVivo() && vilao.getPersonagem().estaVivo()) {
             
-            // Puxa uma pergunta aleatória do banco de perguntas
-            Question perguntaAtual = bancoDePerguntas.getPerguntaAleatoria();
+            //puxa uma pergunta respeitando a progressão de dificuldade colocada em Level.java
+            Question perguntaAtual = fase.getProximaPergunta();
+            //caso acabe o limite de questões por fase
+            if (perguntaAtual == null) {
+                return ResultadoBatalha.DERROTA_LIMITE_PERGUNTAS;
+            }
+            //salva a resistência (HP) do vilão antes da rodada para saber se o jogador acertou a pergunta
+            int hpvilaoAntes = vilao.getPersonagem().getHp();
             
-            // Salva a resistência (HP) do inimigo antes da rodada para saber se o jogador acertou a pergunta
-            int hpInimigoAntes = inimigo.getPersonagem().getHp();
-            
-            // Roda o turno
-            rodada.jogarRodada(jogador, inimigo, perguntaAtual);
+            //roda o turno
+            rodada.jogarRodada(jogador, vilao, perguntaAtual);
 
-            // Se o inimigo tomou dano (HP diminuiu), o jogador ganha pontos
-            if (inimigo.getPersonagem().getHp() < hpInimigoAntes) {
-                // Multiplica a dificuldade da pergunta por 10 para dar os pontos
-                score.adicionarPontos(10 * perguntaAtual.getDificuldade());
+            //se o vilao tomou dano (HP diminuiu), o jogador ganha pontos
+            if (vilao.getPersonagem().getHp() < hpvilaoAntes) {
+                //multiplica a dificuldade da pergunta por 10 para dar os pontos
+                score.adicionarPontosFase(10 * perguntaAtual.getDificuldade());
             }
         }
 
-        finalizarBatalha();
-    }
-
-    private void finalizarBatalha() {
-        input.imprimirLinha();
-        // Verifica quem sobreviveu para declarar o vencedor
-        if (jogador.getPersonagemSelecionado().estaVivo()) {
-            System.out.println("VITÓRIA! Você derrotou o vilão akumatizado e salvou a cidade!");
-            System.out.println("Pontuação final: " + score.getPontuacaoTotal());
-        } else {
-            System.out.println("DERROTA... Fim de jogo!");
+        if (!vilao.getPersonagem().estaVivo()) {
+            score.adicionarPontosTotal();
+            return ResultadoBatalha.VITORIA;
         }
-        input.imprimirLinha();
+        
+        return ResultadoBatalha.DERROTA_JOGADOR;
     }
 }

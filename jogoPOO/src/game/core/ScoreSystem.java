@@ -1,15 +1,35 @@
+/*Gerencia a pontuação do jogador durante o jogo*/
 package game.core;
 
-//Gerencia a pontuação do jogador durante o jogo
+
 public class ScoreSystem {
+    /*atributos*/
+    private int pontuacaoFase;
     private int pontuacaoTotal;
 
+
+    /*construtor*/
     public ScoreSystem() {
+        this.pontuacaoFase = 0;
         this.pontuacaoTotal = 0;
     }
 
-    public void adicionarPontos(int pontos) {
-        this.pontuacaoTotal += pontos;
+
+    /*métodos*/
+    public void iniciarNovaFase() {
+        pontuacaoFase = 0;
+    }
+
+    public void adicionarPontosFase(int pontos) {
+        pontuacaoFase += pontos;
+    }
+
+    public void adicionarPontosTotal() {
+        pontuacaoTotal += pontuacaoFase;
+    }
+
+    public int getPontuacaoFase() {
+        return pontuacaoFase;
     }
 
     public int getPontuacaoTotal() {

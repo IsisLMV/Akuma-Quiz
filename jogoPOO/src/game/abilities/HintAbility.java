@@ -5,7 +5,7 @@ import game.characters.Enemy;
 
 public class HintAbility extends Ability {
     public HintAbility() {
-        super("Miragem (Criar Ilusão nas Alternativas)", 2);
+        super("Realidade (Revelar Alternativa Errada)", 2);
     }
 
     @Override

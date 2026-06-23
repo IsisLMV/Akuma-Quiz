@@ -1,12 +1,11 @@
+/*Classe base para todas as habilidades (com controle do limite de usos) */
+
 package game.abilities;
 
 import game.characters.Player;
 import game.characters.Enemy;
 import game.interfaces.SpecialAbility;
 
-/**
- * Classe base para todas as habilidades. Controle do limite de usos.
- */
 public abstract class Ability implements SpecialAbility {
     protected String nome;
     protected int limiteUsos;
@@ -18,6 +17,7 @@ public abstract class Ability implements SpecialAbility {
         this.usosAtuais = 0;
     }
 
+    /*métodos*/
     @Override
     public String getNome() {
         return nome + " (Usos: " + (limiteUsos - usosAtuais) + ")";
@@ -30,9 +30,14 @@ public abstract class Ability implements SpecialAbility {
 
     @Override
     public void consumirUso() {
-        this.usosAtuais++;
+        if (usosAtuais < limiteUsos) {
+            usosAtuais++;
+        }
     }
-
-    // O método ativar será implementado por cada herói individualmente (Polimorfismo)
+    //inportante para o reset e para o início de novas fases
+    public void resetarUsos() {
+        this.usosAtuais = 0;
+    }
+    //o método ativar será implementado por cada herói individualmente (Polimorfismo)
     public abstract void ativar(Player heroi, Enemy akumatizado);
 }

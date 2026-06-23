@@ -5,16 +5,14 @@ import game.characters.Player;
 import game.characters.Enemy;
 import game.questions.Question;
 import game.utils.InputHandler;
-import game.interfaces.TimedQuestion;
 
-/*Para a entrega 2, ainda no console, as perguntas com tempo não estão 100% precisas com a cronometragem*/
-
-
+/*No console, a cronometragem depende do tempo de digitação do jogador.*/
 
 public class Round {
+    //atributo
     private InputHandler input;
 
-    //Recebe o InputHandler via construtor para reaproveitar o mesmo Scanner do jogo
+    //recebe o InputHandler via construtor para reaproveitar o mesmo Scanner do jogo
     public Round(InputHandler input) {
         this.input = input;
     }
@@ -26,18 +24,17 @@ public class Round {
         System.out.println("Resistência de " + jogador.getNomeUsuario() + ": " + jogador.getPersonagemSelecionado().getHp() + " | Resistência do Adversário: " + inimigo.getPersonagem().getHp());
         input.imprimirLinha();
 
-        // Exibe o enunciado e as alternativas
+        //exibe o enunciado e as alternativas
         pergunta.exibirPergunta();
 
-        //identificaçao de perguntas com tempo (pergunta pela interface) e aviso para os players no terminal
-        if (pergunta instanceof TimedQuestion) {
-            TimedQuestion perguntaComTempo = (TimedQuestion) pergunta;
-        
+        //identificaçao de perguntas com tempo ativado e aviso para os players no terminal
+        if (pergunta.possuiTempo()) {
             System.out.println("!! PERGUNTA RELÂMPAGO !!");
-            System.out.println("Tempo limite: "+ perguntaComTempo.getTempoLimite()+ " segundos");
+            System.out.println("Tempo limite: " + pergunta.getTempoLimite() + " segundos");
         }
 
-        if (jogador.getPersonagemSelecionado().getHabilidade() != null) {
+        //uso de habilidade
+        if (jogador.getPersonagemSelecionado().getHabilidade() != null && jogador.getPersonagemSelecionado().getHabilidade().podeUsar()) {
 
             System.out.println("\nHabilidade disponível:");
             System.out.println("★ " + jogador.getPersonagemSelecionado().getHabilidade().getNome());
@@ -46,15 +43,10 @@ public class Round {
             System.out.println("1 - Sim");
             System.out.println("2 - Não");
 
-            int escolha = input.lerInteiro("Escolha", 1, 2);
+            int escolha = input.lerInteiro("Escolha: ", 1, 2);
 
             if (escolha == 1) {
-
-                if (jogador.getPersonagemSelecionado().getHabilidade().podeUsar()) {
                     jogador.getPersonagemSelecionado().getHabilidade().ativar(jogador, inimigo);
-                } else {
-                    System.out.println("Essa habilidade não possui mais usos.");
-                }
             }
         }
 
@@ -70,31 +62,29 @@ public class Round {
             jogador.getPersonagemSelecionado().desativarMiragem();
         }
 
+        //primeira tentativa
         //lê a resposta do jogador e, se preciso, calcula o tempo
         long tempoInicio = System.currentTimeMillis();
         String resposta = input.lerString("\nSua resposta para questão:");
-        long tempoFim = System.currentTimeMillis();
-        long tempoGasto = (tempoFim - tempoInicio) / 1000;
-        boolean acertou = pergunta.verificarResposta(resposta);
+        //saber se o tempo estourou depende de não estar usando a habilidade da Vesperia
+        boolean passouDoTempo = !jogador.getPersonagemSelecionado().isTempoCongelado() && pergunta.tempoEsgotado(tempoInicio);
+        boolean acertou = !passouDoTempo && pergunta.verificarResposta(resposta);
+        if (passouDoTempo) {
+            System.out.println("\nTEMPO ESGOTADO!");
+        }
 
         //habilidade do Viperion
         if (!acertou && jogador.getPersonagemSelecionado().isSegundaChanceAtiva()) {
-            System.out.println("\n🐍 SEGUNDA CHANCE!");
+            System.out.println("\nSEGUNDA CHANCE!");
             System.out.println("Você errou, mas sua habilidade te ajudou a voltar no tempo para antes de você errar!");
             jogador.getPersonagemSelecionado().desativarSegundaChance();
             tempoInicio = System.currentTimeMillis();
             resposta = input.lerString("\nTente novamente:");
-            tempoFim = System.currentTimeMillis();
-            tempoGasto = (tempoFim - tempoInicio) / 1000;
-            acertou = pergunta.verificarResposta(resposta);
-        }
+            passouDoTempo = !jogador.getPersonagemSelecionado().isTempoCongelado() && pergunta.tempoEsgotado(tempoInicio);
+            acertou = !passouDoTempo && pergunta.verificarResposta(resposta);
 
-        //verificação se a resposta está dentro do tempo e não estava com a habilidade da Vesperia ativa
-        if (pergunta instanceof TimedQuestion && !jogador.getPersonagemSelecionado().isTempoCongelado()) {
-            TimedQuestion perguntaComTempo = (TimedQuestion) pergunta;
-            if (tempoGasto > perguntaComTempo.getTempoLimite()) {
+            if (passouDoTempo) {
                 System.out.println("\nTEMPO ESGOTADO!");
-                acertou = false;
             }
         }
 
@@ -113,7 +103,7 @@ public class Round {
             inimigo.getPersonagem().atacar(jogador.getPersonagemSelecionado());
         }
         
-        // Pausa para o jogador ler o resultado antes de limpar a tela para a próxima pergunta
+        //pausa para o jogador ler o resultado antes da próxima pergunta
         input.esperarEnter();
     }
 }
