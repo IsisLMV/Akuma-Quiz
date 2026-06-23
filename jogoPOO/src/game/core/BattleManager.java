@@ -12,12 +12,14 @@ public class BattleManager {
     private Enemy vilao;
     private ScoreSystem score;
     private Round rodada;
+    private GameStats stats;
 
-    public BattleManager(Player jogador, Level fase, InputHandler input, ScoreSystem score) {
+    public BattleManager(Player jogador, Level fase, InputHandler input, ScoreSystem score, GameStats stats) {
         this.jogador = jogador;
         this.fase = fase;
         this.vilao = fase.getVilao();
         this.score = score;
+        this.stats = stats;
         this.rodada = new Round(input);
     }
 
@@ -36,8 +38,9 @@ public class BattleManager {
             //salva a resistência (HP) do vilão antes da rodada para saber se o jogador acertou a pergunta
             int hpvilaoAntes = vilao.getPersonagem().getHp();
             
-            //roda o turno
-            rodada.jogarRodada(jogador, vilao, perguntaAtual);
+            //roda o turno e atualiza as estatísticas
+            boolean acertou = rodada.jogarRodada(jogador, vilao, perguntaAtual);
+            stats.registrarResposta(acertou);
 
             //se o vilao tomou dano (HP diminuiu), o jogador ganha pontos
             if (vilao.getPersonagem().getHp() < hpvilaoAntes) {

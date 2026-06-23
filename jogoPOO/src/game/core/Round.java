@@ -17,7 +17,7 @@ public class Round {
         this.input = input;
     }
 
-    public void jogarRodada(Player jogador, Enemy inimigo, Question pergunta) {
+    public boolean jogarRodada(Player jogador, Enemy inimigo, Question pergunta) {
         input.imprimirLinha();
         System.out.println("--- NOVA PERGUNTA ---");
         
@@ -105,5 +105,8 @@ public class Round {
         
         //pausa para o jogador ler o resultado antes da próxima pergunta
         input.esperarEnter();
+
+        //mudança do tipo de return do método para poder quantificar acertos (estatísticas finais)
+        return acertou;
     }
 }

@@ -18,6 +18,7 @@ public class Game {
         //inicializando os sistemas globais
         InputHandler input = new InputHandler();
         ScoreSystem score = new ScoreSystem();
+        GameStats stats = new GameStats();
         QuestionBank bancoDePerguntas = new QuestionBank();
 
         //tela de boas-vindas
@@ -55,29 +56,29 @@ public class Game {
         carregarPerguntas(faseFinal, bancoDePerguntas, 2, 8, 10);
 
         //jogar campanha
-        jogarFaseComRetry(jogador, fase1, input, score);
-        jogarFaseComRetry(jogador, fase2, input, score);
-        jogarFaseComRetry(jogador, fase3, input, score);
-        jogarFaseComRetry(jogador, faseFinal, input, score);
+        jogarFaseComRetry(jogador, fase1, input, score, stats);
+        jogarFaseComRetry(jogador, fase2, input, score, stats);
+        jogarFaseComRetry(jogador, fase3, input, score, stats);
+        jogarFaseComRetry(jogador, faseFinal, input, score, stats);
 
-        //final
-        System.out.println("\nZEROU! Jogo Finalizado!");
-        System.out.println("Pontuação total: " + score.getPontuacaoTotal());
-
+        //final (estatísticas finais)
+        exibirTelaFinal(jogador, score, stats, input);
         input.fechar();
     }
 
-    private static void jogarFaseComRetry(Player jogador, Level fase, InputHandler input, ScoreSystem score) {
+    private static void jogarFaseComRetry(Player jogador, Level fase, InputHandler input, ScoreSystem score, GameStats stats) {
         boolean venceu = false;
         while (!venceu) {
+            stats.registrarTentativa();
             fase.reset();
             jogador.getPersonagemSelecionado().restaurarEstado();
             score.iniciarNovaFase();
-            BattleManager batalha = new BattleManager(jogador, fase, input, score);
+            BattleManager batalha = new BattleManager(jogador, fase, input, score, stats);
             ResultadoBatalha resultado = batalha.iniciarBatalha();
             switch (resultado) {
                 case VITORIA:
                     venceu = true;
+                    stats.registrarFaseConcluida();
                     break;
 
                 case DERROTA_JOGADOR:
@@ -115,5 +116,27 @@ public class Game {
         for (int i = 0; i < dificeis; i++) {
             fase.adicionarPergunta(banco.getPerguntaAleatoriaPorDificuldade(3));
         }
+    }
+    private static void exibirTelaFinal(Player jogador, ScoreSystem score, GameStats stats, InputHandler input) {
+        input.imprimirLinha();
+        System.out.println("        ZEROU! MISSÃO CONCLUÍDA!");
+        input.imprimirLinha();
+        System.out.println();
+        System.out.println("Herói: " + jogador.getPersonagemSelecionado().getNomePersonagem());
+        System.out.println("Jogador(a): " + jogador.getNomeUsuario());
+        System.out.println();
+        System.out.println("Pontuação total: " + score.getPontuacaoTotal());
+        System.out.println();
+        System.out.println("Fases concluídas: " + stats.getFasesConcluidas());
+        System.out.println("Vilões derrotados: " + stats.getFasesConcluidas());
+        System.out.println("Tentativas totais: " + stats.getTentativas());
+        System.out.println();
+        System.out.println("Perguntas respondidas: " + stats.getPerguntasRespondidas());
+        System.out.println("Acertos: " + stats.getAcertos());
+        System.out.println("Erros: " + stats.getErros());
+        System.out.printf("Taxa de acerto: %.2f%%\n", stats.calcularTaxaAcerto());
+        System.out.println();
+        System.out.println("Parabéns! Você zerou o jogo!");
+        input.imprimirLinha();
     }
 }
