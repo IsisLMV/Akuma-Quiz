@@ -5,6 +5,7 @@ import game.characters.Player;
 import game.characters.Enemy;
 import game.questions.Question;
 import game.utils.InputHandler;
+import game.exceptions.EntradaInvalidaException;
 
 /*No console, a cronometragem depende do tempo de digitação do jogador.*/
 
@@ -65,7 +66,7 @@ public class Round {
         //primeira tentativa
         //lê a resposta do jogador e, se preciso, calcula o tempo
         long tempoInicio = System.currentTimeMillis();
-        String resposta = input.lerString("\nSua resposta para questão:");
+        String resposta = lerRespostaValida("\nSua resposta para questão:", pergunta);
         //saber se o tempo estourou depende de não estar usando a habilidade da Vesperia
         boolean passouDoTempo = !jogador.getPersonagemSelecionado().isTempoCongelado() && pergunta.tempoEsgotado(tempoInicio);
         boolean acertou = !passouDoTempo && pergunta.verificarResposta(resposta);
@@ -79,7 +80,7 @@ public class Round {
             System.out.println("Você errou, mas sua habilidade te ajudou a voltar no tempo para antes de você errar!");
             jogador.getPersonagemSelecionado().desativarSegundaChance();
             tempoInicio = System.currentTimeMillis();
-            resposta = input.lerString("\nTente novamente:");
+            resposta = lerRespostaValida("\nTente novamente:", pergunta);
             passouDoTempo = !jogador.getPersonagemSelecionado().isTempoCongelado() && pergunta.tempoEsgotado(tempoInicio);
             acertou = !passouDoTempo && pergunta.verificarResposta(resposta);
 
@@ -108,5 +109,18 @@ public class Round {
 
         //mudança do tipo de return do método para poder quantificar acertos (estatísticas finais)
         return acertou;
+    }
+
+    private String lerRespostaValida(String mensagem, Question pergunta) {
+        while (true) {
+            try {
+                String resposta = input.lerString(mensagem);
+                pergunta.validarResposta(resposta);
+                return resposta;
+
+            } catch (EntradaInvalidaException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }

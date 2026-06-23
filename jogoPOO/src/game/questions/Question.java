@@ -3,6 +3,7 @@
 package game.questions;
 
 import game.interfaces.TimedQuestion;
+import game.exceptions.EntradaInvalidaException;
 
 public abstract class Question implements TimedQuestion {
     /*atributos*/
@@ -64,15 +65,24 @@ public abstract class Question implements TimedQuestion {
                 tempoLimite = 15;
         }
     }
-    //
+
+    //método base para validação de resposta (refinamento posterior nas subclasses)
+    public void validarResposta(String respostaJogador) throws EntradaInvalidaException {
+        if (respostaJogador == null || respostaJogador.trim().isEmpty()) {
+            throw new EntradaInvalidaException("Entrada inválida! Digite uma resposta.");
+        }
+    }
+
     public boolean verificarResposta(String respostaJogador) {
         return respostaJogador.equalsIgnoreCase(respostaCerta);
     }
+
     public void exibirPergunta() {
         System.out.println(enunciado);
         exibirAlternativas();
 
-    }    
+    } 
+
     public String obterAlternativaErrada() {
         return null;
     }

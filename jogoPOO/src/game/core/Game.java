@@ -11,6 +11,7 @@ import game.characters.VilaoF2;
 import game.characters.VilaoF3;
 import game.questions.QuestionBank;
 import game.utils.InputHandler;
+import game.exceptions.PerguntaIndisponivelException;
 
 public class Game {
 
@@ -50,10 +51,22 @@ public class Game {
         Level faseFinal = new Level("Fase Final", new Enemy(new VilaoBoss()), true); //única fase que tem perguntas cronometradas
 
         //carregar perguntas nas fases (todas vêm do mesmo banco, mas as fases recebem perguntas diferentes)
-        carregarPerguntas(fase1, bancoDePerguntas, 10, 6, 4);
-        carregarPerguntas(fase2, bancoDePerguntas, 6, 10, 4);
-        carregarPerguntas(fase3, bancoDePerguntas, 4, 6, 10);
-        carregarPerguntas(faseFinal, bancoDePerguntas, 2, 8, 10);
+        try {
+            carregarPerguntas(fase1, bancoDePerguntas, 10, 6, 4);
+            carregarPerguntas(fase2, bancoDePerguntas, 6, 10, 4);
+            carregarPerguntas(fase3, bancoDePerguntas, 4, 6, 10);
+            carregarPerguntas(faseFinal, bancoDePerguntas, 2, 8, 10);
+
+        } catch (PerguntaIndisponivelException e) {
+            input.imprimirLinha();
+            System.out.println("Erro ao montar as fases do jogo:");
+            System.out.println(e.getMessage());
+            System.out.println("Verifique se o banco de perguntas possui questões suficientes.");
+            input.imprimirLinha();
+
+            input.fechar();
+            return;
+        }
 
         //jogar campanha
         jogarFaseComRetry(jogador, fase1, input, score, stats);
@@ -106,7 +119,7 @@ public class Game {
             input.imprimirLinha();
         }
     }
-    private static void carregarPerguntas(Level fase, QuestionBank banco, int faceis, int medias, int dificeis) {
+    private static void carregarPerguntas(Level fase, QuestionBank banco, int faceis, int medias, int dificeis) throws PerguntaIndisponivelException {
         for (int i = 0; i < faceis; i++) {
             fase.adicionarPergunta(banco.getPerguntaAleatoriaPorDificuldade(1));
         }

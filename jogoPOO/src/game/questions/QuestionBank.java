@@ -3,6 +3,7 @@ package game.questions;
 
 import java.util.ArrayList;
 import java.util.Random;
+import game.exceptions.PerguntaIndisponivelException;
 
 public class QuestionBank {
 
@@ -1178,8 +1179,8 @@ public class QuestionBank {
         return perguntas.remove(indice);
     }
 
-    //retorna pergunta aleatória filtrada por dificuldade
-    public Question getPerguntaAleatoriaPorDificuldade(int dificuldade) {
+    //retorna pergunta aleatória filtrada por dificuldade + tratativa de erro
+    public Question getPerguntaAleatoriaPorDificuldade(int dificuldade) throws PerguntaIndisponivelException {
         ArrayList<Question> perguntasFiltradas = new ArrayList<>();
         //percorre todas as perguntas para criar uma nova lista filtrada
         for (Question pergunta : perguntas) {
@@ -1188,7 +1189,7 @@ public class QuestionBank {
             }
         }
         if (perguntasFiltradas.isEmpty()) {
-            return null;
+            throw new PerguntaIndisponivelException("Não há perguntas disponíveis para a dificuldade " + dificuldade + ".");
         }
 
         //sorteio dentro das filtradas
