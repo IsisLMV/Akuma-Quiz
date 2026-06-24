@@ -1,99 +1,176 @@
 # Jogo-LPOO-nomeProvisorio-
 
-(README em andamento)
+Projeto desenvolvido para a disciplina de Linguagem de Programação Orientada a Objetos.
 
-*Descrição do jogo será adicionada depois de definirmos o tema e as mecânicas finais*
+O projeto consiste em um jogo de quiz com batalhas em turnos, inspirado na série Miraculous: As Aventuras de Ladybug. Nele, o jogador escolhe um herói, responde perguntas e enfrenta vilões em diferentes fases. Cada resposta influencia diretamente a batalha: ao acertar, o jogador ataca o inimigo; ao errar ou deixar o tempo acabar em perguntas cronometradas, o inimigo contra-ataca.
+
+A versão atual funciona por meio de interface textual no terminal. A implementação de uma interface gráfica foi considerada, mas ficou como possibilidade de melhoria futura devido ao tempo disponível para a entrega.
+
+**Este projeto possui finalidade exclusivamente acadêmica e não tem fins comerciais.*
 
 ## Como executar
+
+Para executar o projeto, é necessário ter o Java instalado na máquina.
+
+No terminal, a partir da pasta do projeto, acesse a pasta `src`:
+
+```bash
+cd jogoPOO/src
+```
+
+Compile a classe principal:
+
+```bash
+javac game/core/Game.java
+```
+
+Execute o jogo:
+
+```bash
+java game.core.Game
+```
+
+---
 
 ## Funcionalidades Implementadas
 - Sistema de personagens baseado em herança e polimorfismo.
 - Seleção de heróis jogáveis.
-- Sistema de inimigos.
+- Sistema de inimigos e vilões por fase.
+- Sistema de fases progressivas.
 - Sistema de batalhas por rodadas.
-- Sistema de pontuação.
-- Banco de perguntas aleatórias.
+- Sistema de pontuação por fase e pontuação total.
+- Banco de perguntas aleatórias baseadas em 3 níveis: Fundamental 1, Fundamental 2 e Ensino Médio.
 - Perguntas de múltipla escolha.
 - Perguntas de múltiplas respostas.
 - Perguntas de verdadeiro ou falso.
 - Perguntas com tempo limite.
 - Habilidades especiais exclusivas para cada personagem.
+- Sistema de tentativas/retry em caso de derrota (checkpoints).
+- Estatísticas finais da partida.
+- Tratamento de entradas inválidas.
+- Exceções personalizadas.
 - Interface textual via terminal.
+---
 
 ## Estrutura do Projeto
-O projeto está organizado em pacotes (packages) com responsabilidades bem definidas, buscando facilitar a manutenção e a expansão do sistema.
+O projeto está organizado em pacotes (`packages`) com responsabilidades bem definidas, buscando facilitar a manutenção, a expansão e a leitura do sistema.
 
 ### **`core`**
 
 Contém as classes responsáveis pelo funcionamento principal do jogo.
 
-- `Game` – ponto de entrada da aplicação (`Main`).
-- `BattleManager` – coordena o fluxo das batalhas.
-- `Round` – controla a execução de uma rodada.
-- `ScoreSystem` – gerencia a pontuação do jogador.
+- `Game` – ponto de entrada da aplicação e responsável pelo fluxo geral do jogo.
+- `BattleManager` – coordena a batalha de uma fase específica.
+- `Round` – controla a execução de uma rodada, incluindo pergunta, resposta, uso de habilidade e ataque.
+- `ScoreSystem` – gerencia a pontuação da fase e a pontuação total.
+- `Level` – representa uma fase do jogo, controlando vilão, perguntas e progressão de dificuldade.
+- `GameStats` – registra estatísticas da partida, como acertos, erros, tentativas e fases concluídas.
+- `ResultadoBatalha` – enumeração que representa os possíveis resultados de uma batalha.
 
 ### **`characters`**
 
 Contém as classes relacionadas aos personagens do jogo.
 
-- `Character` – classe abstrata que define atributos e comportamentos comuns.
-- `Ladybug` – personagem equilibrada com habilidade de recuperação de vida.
+- `Character` – classe abstrata que define atributos e comportamentos comuns aos personagens.
+- `Ladybug` – personagem com habilidade de recuperação de vida.
 - `CatNoir` – personagem ofensivo com dano dobrado temporário.
 - `Carapace` – personagem defensivo com escudo protetor.
 - `RenaRouge` – personagem estratégica capaz de revelar uma alternativa incorreta.
 - `Viperion` – personagem que permite uma segunda tentativa de resposta.
-- `Vesperia` – personagem que ignora o limite de tempo de uma pergunta.
-- `Player` – representa o jogador.
-- `Enemy` – representa o oponente.
+- `Vesperia` – personagem que ignora temporariamente o limite de tempo de uma pergunta.
+- `VilaoF1`, `VilaoF2`, `VilaoF3` e `VilaoBoss` – vilões enfrentados ao longo das fases.
+- `Player` – representa o jogador, armazenando nome, pontuação e personagem escolhido.
+- `Enemy` – representa o inimigo da fase.
+- `CharacterFactory` – centraliza a criação dos personagens jogáveis a partir da escolha do usuário.
 
 ### **`questions`**
 
 Responsável pelo sistema de perguntas e respostas.
 
-- `Question` – classe abstrata base para todas as perguntas.
-- `MultipleChoiceQuestion` – perguntas de múltipla escolha.
-- `TrueFalseQuestion` – perguntas de verdadeiro ou falso.
-- `TimedMultipleChoiceQuestion` – perguntas de múltipla escolha com tempo limite.
-- `TimedTrueFalseQuestion` – perguntas de verdadeiro ou falso com tempo limite.
-- `MultipleAnswerQuestion` – perguntas com múltiplas respostas corretas.
-- `QuestionBank` – armazena e fornece perguntas durante o jogo.
-
-### **`utils`**
-
-Contém classes utilitárias utilizadas por diferentes partes do sistema.
-
-- `InputHandler` – centraliza a leitura de dados fornecidos pelo usuário.
+- `Question` – classe abstrata base para todas as perguntas, incluindo suporte a tempo limite.
+- `MultipleChoiceQuestion` – representa perguntas de múltipla escolha.
+- `MultipleAnswerQuestion` – representa perguntas com mais de uma alternativa correta.
+- `TrueFalseQuestion` – representa perguntas de verdadeiro ou falso.
+- `QuestionBank` – armazena e fornece perguntas aleatórias, inclusive filtradas por dificuldade.
 
 ### **`abilities`**
 
 Contém as habilidades especiais dos personagens.
 
-- `Ability` – classe abstrata base para habilidades.
+- `Ability` – classe abstrata base para habilidades, com controle de limite de usos.
 - `HealAbility` – recuperação parcial de vida (Ladybug).
-- `DoubleDamageAbility` – próximo ataque causa dano dobrado (Cat Noir).
+- `DoubleDamageAbility` – faz o próximo ataque causar dano dobrado (Cat Noir).
 - `ShieldAbility` – bloqueia um ataque recebido (Carapace).
 - `HintAbility` – revela uma alternativa incorreta (Rena Rouge).
 - `SecondChanceAbility` – permite responder novamente após um erro (Viperion).
-- `TimeFreezeAbility` – ignora o limite de tempo de uma pergunta (Vesperia).
+- `TimeFreezeAbility` – ignora o limite de tempo de uma pergunta cronometrada (Vesperia).
+
+### **`interfaces`**
+
+Contém contratos utilizados por classes do sistema.
+
+- `SpecialAbility` – define os métodos obrigatórios para habilidades especiais.
+- `TimedQuestion` – define o comportamento relacionado a perguntas com tempo limite.
+
+### **`exceptions`**
+
+Contém exceções personalizadas do projeto.
+
+- `EntradaInvalidaException` – utilizada para tratar entradas inválidas do usuário.
+- `PerguntaIndisponivelException` – utilizada quando não há perguntas suficientes para montar as fases.
+
+### **`utils`**
+
+Contém classes auxiliares utilizadas por diferentes partes do sistema.
+
+- `InputHandler` – centraliza a leitura, validação e organização das entradas fornecidas pelo usuário no terminal.
+
+---
 
 ## Justificativas de Design
-O projeto foi desenvolvido seguindo os princípios da Programação Orientada a Objetos, buscando modularidade, reutilização de código e facilidade de manutenção.
+O projeto foi desenvolvido seguindo os princípios da Programação Orientada a Objetos, buscando modularidade, reutilização de código, separação de responsabilidades, encapsulamento e facilidade de manutenção.
 
-A classe `BattleManager` atua como controlador principal da aplicação, sendo responsável por coordenar o fluxo da batalha e a interação entre os demais componentes do sistema.
+A classe `Game` atua como ponto de entrada da aplicação, sendo responsável por inicializar os principais objetos do sistema, criar o jogador, montar as fases e controlar o fluxo geral da campanha.
 
-Para representar os personagens do jogo foi utilizada uma hierarquia de herança baseada na classe abstrata `Character`, que concentra atributos e comportamentos comuns. Dessa forma, diferentes tipos de personagens podem ser implementados sem duplicação de código.
+A classe `BattleManager` coordena a batalha de uma fase específica, interagindo com `Player`, `Enemy`, `Level`, `Round`, `ScoreSystem` e `GameStats`. Essa separação evita que toda a lógica do jogo fique concentrada em uma única classe.
 
-Além da hierarquia de personagens, foi criada a hierarquia de habilidades baseada na classe abstrata `Ability`. Cada personagem possui uma habilidade específica implementada em uma subclasse própria, permitindo reutilização de código e aplicação de polimorfismo.
+Para representar os personagens, foi utilizada uma hierarquia baseada na classe abstrata `Character`, que concentra atributos e comportamentos comuns, como vida, ataque, defesa, habilidade, cálculo de dano, recebimento de dano e estados temporários. As classes `Ladybug`, `CatNoir`, `Carapace`, `RenaRouge`, `Viperion`, `Vesperia` e os vilões especializam essa estrutura, aproveitando herança e polimorfismo.
 
-O sistema de perguntas foi modelado a partir da classe abstrata `Question` e expandido para suportar diferentes modalidades de pergunta, incluindo perguntas de múltipla escolha (`MultipleChoiceQuestion`), verdadeiro ou falso (`TrueFalseQuestion`), temporizadas (`TimedMultipleChoiceQuestion` e `TimedTrueFalseQuestion`) e questões com múltiplas respostas corretas (`MultipleAnswerQuestion`), mantendo compatibilidade com a estrutura base fornecida. Essa abordagem utiliza polimorfismo e facilita a inclusão de novos tipos de perguntas futuramente.
+A criação dos personagens jogáveis foi centralizada na classe `CharacterFactory`, reduzindo o acoplamento entre a classe principal `Game` e as classes concretas dos personagens.
 
-O gerenciamento das questões é realizado pela classe `QuestionBank`, responsável por armazenar e disponibilizar perguntas durante a execução do jogo.
+As habilidades foram modeladas a partir da classe abstrata `Ability`, que implementa a interface `SpecialAbility`. Essa estrutura define um contrato comum para todas as habilidades e permite que cada personagem tenha um comportamento especial próprio, mantendo o controle de usos e favorecendo a expansão futura.
 
-As classes `Player` e `Enemy` encapsulam as informações dos participantes da batalha, enquanto `ScoreSystem` centraliza o controle da pontuação.
+O sistema de perguntas foi modelado a partir da classe abstrata `Question`, especializada pelas classes `MultipleChoiceQuestion`, `MultipleAnswerQuestion` e `TrueFalseQuestion`. A interface `TimedQuestion` define o comportamento relacionado ao tempo limite, enquanto a própria classe `Question` controla se uma pergunta está ou não cronometrada. Dessa forma, não foi necessário criar uma classe separada para cada tipo de pergunta temporizada.
 
-Para evitar repetição de código relacionada à entrada de dados, foi criada a classe utilitária `InputHandler`, responsável pela comunicação entre o sistema e o usuário.
+A classe `QuestionBank` é responsável por armazenar as perguntas e fornecer questões aleatórias, inclusive por nível de dificuldade. Já a classe `Level` organiza as perguntas em fases, controla a progressão de dificuldade e define quais perguntas terão limite de tempo.
 
-Essa organização favorece a separação de responsabilidades entre as classes, melhora a legibilidade do código e facilita futuras extensões do projeto.
+A classe `Round` representa uma rodada individual da batalha, sendo responsável por exibir a pergunta, permitir o uso de habilidades, validar respostas e aplicar os efeitos do acerto ou erro.
+
+O controle da pontuação foi separado na classe `ScoreSystem`, enquanto as estatísticas gerais da partida foram concentradas em `GameStats`. Essa separação torna o código mais organizado e facilita alterações futuras.
+
+Para aumentar a robustez da aplicação, foram criadas exceções personalizadas, como `EntradaInvalidaException` e `PerguntaIndisponivelException`. A entrada de dados foi centralizada em `InputHandler`, evitando repetição de código e impedindo que o programa seja encerrado por entradas inválidas.
+
+Essa organização favorece a clareza do código, facilita futuras extensões e demonstra a aplicação prática de conceitos como herança, abstração, polimorfismo, encapsulamento, interfaces, exceções e composição.
+
+---
+
+## Limitações e Melhorias Futuras
+
+Devido ao tempo disponível para a entrega, o projeto foi finalizado com interface textual via terminal.
+Como melhorias futuras, podemos implementar:
+
+- Interface gráfica.
+- Novos personagens jogáveis.
+- Novas habilidades especiais.
+- Novos vilões.
+- Novos tipos de perguntas.
+- Novos modos de jogo.
+- Sistema de loja de personagens ou power-ups.
+- Sistema de salvamento de progresso e Rankings.
+- Balanceamento mais refinado de fases, dano e pontuação.
+- etc.
+
+---
 
 ## UML - Diagrama de classe
 Organização visual da arquitetura do nosso projeto:
@@ -127,6 +204,7 @@ classDiagram
 		+ ativarMiragem() void
 		+ desativarMiragem() void
 		+ recuperarVida(quantidade:int) void
+		+ restaurarEstado() void
 		+ atacar(alvo:Character) void
 		+ calcularDano(dificuldade:int) int
 		+ receberDano(dano:int) int
@@ -138,6 +216,9 @@ classDiagram
     class RenaRouge
     class Viperion
     class Vesperia
+	class VilaoF1
+	class VilaoF2
+	class VilaoF3
     class VilaoBoss
 
     Character <|-- Ladybug
@@ -146,23 +227,63 @@ classDiagram
     Character <|-- RenaRouge
     Character <|-- Viperion
     Character <|-- Vesperia
+	Character <|-- VilaoF1
+	Character <|-- VilaoF2
+	Character <|-- VilaoF3
     Character <|-- VilaoBoss
 
     class Player {
         - nomeUsuario : String
         - pontuacao : int
-	- personagemSelecionado : Character
+		- personagemSelecionado : Character
         + adicionarPontuacao() void
+		+ getNomeUsuario() String
+    	+ getPontuacao() int
+    	+ getPersonagemSelecionado() Character
     }
 
     class Enemy {
     - personagemInimigo : Character
     }
 
-Player --> Character
-Enemy --> Character
-Enemy o-- VilaoBoss
-Character o-- Ability
+	class CharacterFactory {
+    + criar(escolha:int) Character
+	}
+
+Player --> Character : escolhe
+Enemy --> Character : usa
+Character --> Ability : possui
+CharacterFactory ..> Character : cria
+
+%% =====================================================
+%% PACOTE ABILITIES - HABILIDADES
+%% =====================================================
+    class Ability {
+        <<abstract>>
+        # nome : String
+        # limiteUsos : int
+        # usosAtuais : int
+		+ podeUsar() boolean
+	    + consumirUso() void
+	    + resetarUsos() void
+    	+ ativar(heroi:Player, akumatizado:Enemy) void
+    }
+
+    class HealAbility
+    class DoubleDamageAbility
+    class ShieldAbility
+    class HintAbility
+    class SecondChanceAbility
+    class TimeFreezeAbility
+
+    Ability <|-- HealAbility
+    Ability <|-- DoubleDamageAbility
+    Ability <|-- ShieldAbility
+    Ability <|-- HintAbility
+    Ability <|-- SecondChanceAbility
+    Ability <|-- TimeFreezeAbility
+
+Ability ..|> SpecialAbility
 
 %% =====================================================
 %% PACOTE QUESTIONS - PERGUNTAS
@@ -170,11 +291,16 @@ Character o-- Ability
     class Question {
         <<abstract>>
         # enunciado : String
-        # respostaCorreta : String
+        # respostaCerta : String
         # dificuldade : int
+		# possuiTempo : boolean
+   	 	# tempoLimite : int
+    	+ ativarTempo() void
+		+ validarResposta(respostaJogador:String) void
     	+ verificarResposta(respostaJogador:String) boolean
    		+ exibirPergunta() void
    		+ obterAlternativaErrada() String
+		+ tempoEsgotado(tempoInicio:long) boolean
     	+ exibirAlternativas() void
     }
 
@@ -188,79 +314,124 @@ Character o-- Ability
 
     class TrueFalseQuestion
 
-    class TimedMultipleChoiceQuestion {
-        - tempoLimite : int
-    }
-
-    class TimedTrueFalseQuestion {
-        - tempoLimite : int
-    }
-
     Question <|-- MultipleChoiceQuestion
     Question <|-- MultipleAnswerQuestion
     Question <|-- TrueFalseQuestion
-    MultipleChoiceQuestion <|-- TimedMultipleChoiceQuestion
-    TrueFalseQuestion <|-- TimedTrueFalseQuestion
 
     class QuestionBank {
         - perguntas : ArrayList<Question>
 		- carregarPerguntas() void
         + getPerguntaAleatoria() Question
+		+ getPerguntaAleatoriaPorDificuldade(dificuldade:int) Question
     }
 
-    QuestionBank "1" o-- "*" Question
-
-TimedMultipleChoiceQuestion ..|> TimedQuestion
-TimedTrueFalseQuestion ..|> TimedQuestion
+    QuestionBank "1" o-- "*" Question : armazena
 
 %% =====================================================
-%% PACOTE CORE
+%% PACOTE CORE - FLUXO PRINCIPAL
 %% =====================================================
     class Game {
-	+ main() void
+		+ main() void
+		- jogarFaseComRetry(jogador:Player, fase:Level, input:InputHandler, score:ScoreSystem, stats:GameStats) void
+    	- carregarPerguntas(fase:Level, banco:QuestionBank, faceis:int, medias:int, dificeis:int) void
+    	- exibirTelaFinal(jogador:Player, score:ScoreSystem, stats:GameStats, input:InputHandler) void
     }
     
     class BattleManager {
 		- jogador : Player
-   		- inimigo : Enemy
-   		- bancoDePerguntas : QuestionBank
-		- input : InputHandler
+		- fase : Level
+   		- vilao : Enemy
    		- score : ScoreSystem
    		- rodada : Round
+		- stats : GameStats
         + iniciarBatalha() void
-		- finalizarBatalha() void
     }
 
     class Round {
-	- input : InputHandler
-        + jogarRodada() void
+		- input : InputHandler
+        + jogarRodada(jogador:Player, inimigo:Enemy, pergunta:Question) boolean
+		- lerRespostaValida(mensagem:String, pergunta:Question) String
     }
+
+	class Level {
+	    - nomeFase : String
+	    - vilao : Enemy
+	    - dificuldadeCronometrada : int
+	    - todasCronometradas : boolean
+		- todasFaceis : List
+	    - todasMedias : List
+	    - todasDificeis : List
+	    - faceis : List
+	    - medias : List
+	    - dificeis : List
+		- faceisUsadas : int
+	    - mediasUsadas : int
+	    - dificeisUsadas : int
+		+ reset() void
+		- prepararPergunta(pergunta:Question) Question
+	    + adicionarPergunta(pergunta:Question) void
+		- selecionarPorRegra(maxFaceis:int, maxMedias:int, maxDificeis:int) Question
+	    + getProximaPergunta() Question
+	    
+	}
 
     class ScoreSystem {
-        - pontuacaoTotal : int
-        + adicionarPontos() void
+        - pontuacaoFase : int
+	    - pontuacaoTotal : int
+	    + iniciarNovaFase() void
+	    + adicionarPontosFase(pontos:int) void
+	    + adicionarPontosTotal() void
     }
 
-    Game --> BattleManager
+	class GameStats {
+	    - fasesConcluidas : int
+	    - tentativas : int
+	    - perguntasRespondidas : int
+	    - acertos : int
+	    - erros : int
+	    + registrarTentativa() void
+	    + registrarFaseConcluida() void
+	    + registrarResposta(acertou:boolean) void
+	    + calcularTaxaAcerto() double
+	}
 
-    BattleManager --> Player
-    BattleManager --> Enemy
-    BattleManager --> QuestionBank
-    BattleManager --> ScoreSystem
-    BattleManager --> Round
+	class ResultadoBatalha {
+	    <<enumeration>>
+	    VITORIA
+	    DERROTA_JOGADOR
+	    DERROTA_LIMITE_PERGUNTAS
+	}
 
-    Round "1" --> "1" Question
-    Round --> Player
-    Round --> Enemy
-    Round ..> TimedQuestion
+	Game --> Player : cria
+	Game --> CharacterFactory : usa
+	Game --> QuestionBank : monta fases
+	Game --> Level : executa
+	Game --> ScoreSystem : usa
+	Game --> GameStats : usa
+	Game --> BattleManager : inicia
+	
+	BattleManager --> Player : controla
+	BattleManager --> Level : usa
+	BattleManager --> Enemy : enfrenta
+	BattleManager --> Round : executa
+	BattleManager --> ScoreSystem : atualiza
+	BattleManager --> GameStats : registra
+	BattleManager --> ResultadoBatalha : retorna
+	
+	Level --> Enemy : possui
+	Level "1" o-- "*" Question : organiza
+	Round --> Player : usa
+	Round --> Enemy : usa
+	Round --> Question : apresenta
+	Round ..> TimedQuestion : verifica tempo
 
 %% =====================================================
 %% PACOTE UTILS
 %% =====================================================
     class InputHandler {
 	- scanner : Scanner
-        + lerString() String
-	+ lerInteiro() int
+	+ lerString(mensagem:String) String
+	+ lerInteiro(mensagem:String, min:int, max:int) int
 	+ esperarEnter() void
 	+ imprimirLinha() void
 	+ fechar() void
@@ -272,36 +443,15 @@ Round ..> InputHandler
 Game ..> InputHandler
 
 %% =====================================================
-%% PACOTE ABILITIES
+%% PACOTE EXCEPTIONS
 %% =====================================================
-    class Ability {
-        <<abstract>>
-        # nome : String
-        # limiteUsos : int
-        # usosAtuais : int
-    	+ ativar(heroi:Player, akumatizado:Enemy) void
-    }
+class EntradaInvalidaException
+class PerguntaIndisponivelException
 
-    class HealAbility
-
-    class DoubleDamageAbility
-
-    class ShieldAbility
-
-    class HintAbility
-
-    class SecondChanceAbility
-
-    class TimeFreezeAbility
-
-    Ability <|-- HealAbility
-    Ability <|-- DoubleDamageAbility
-    Ability <|-- ShieldAbility
-    Ability <|-- HintAbility
-    Ability <|-- SecondChanceAbility
-    Ability <|-- TimeFreezeAbility
-
-Ability ..|> SpecialAbility
+InputHandler ..> EntradaInvalidaException : trata
+Question ..> EntradaInvalidaException : valida
+QuestionBank ..> PerguntaIndisponivelException : lança
+Game ..> PerguntaIndisponivelException : trata
 
 %% =====================================================
 %% PACOTE INTERFACES
