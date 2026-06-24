@@ -212,7 +212,7 @@ public class QuestionBank {
         perguntas.add(
             new MultipleChoiceQuestion(
                 "Qual é o resultado de 6 × 8?",
-                "c",
+                "d",
                 2,
                 alternativasM13
             )
@@ -221,8 +221,8 @@ public class QuestionBank {
         String[] alternativasM14 = {
             "a) Pedro Álvares Cabral",
             "b) Dom Pedro I",
-            "c) Tiradentes",
-            "d) Getúlio Vargas"
+            "c) Vasco da Gama",
+            "d) Cristovão Colombo"
         };
         perguntas.add(
             new MultipleChoiceQuestion(
@@ -323,8 +323,83 @@ public class QuestionBank {
             )
         );
 
+        String[] alternativasM21 = {
+            "a) Substantivo",
+            "b) Verbo",
+            "c) Adjetivo",
+            "d) Pronome"
+        };
+        perguntas.add(
+            new MultipleChoiceQuestion(
+                "Na frase 'A menina correu rapidamente', qual é a classe gramatical da palavra 'menina'?",
+                "a",
+                2,
+                alternativasM21
+            )
+        );
+
+        String[] alternativasM22 = {
+            "a) Book",
+            "b) Table",
+            "c) School",
+            "d) Window"
+        };
+        perguntas.add(
+            new MultipleChoiceQuestion(
+                "Qual palavra em inglês significa 'livro'?",
+                "a",
+                2,
+                alternativasM22
+            )
+        );
+
+        String[] alternativasM23 = {
+            "a) Sujeito",
+            "b) Predicado",
+            "c) Objeto direto",
+            "d) Vocativo"
+        };
+        perguntas.add(
+            new MultipleChoiceQuestion(
+                "Na frase 'O cachorro latiu durante a noite', qual é o termo 'O cachorro'?",
+                "a",
+                2,
+                alternativasM23
+            )
+        );
+
+        String[] alternativasM24 = {
+            "a) Run",
+            "b) Eat",
+            "c) Blue",
+            "d) Sleep"
+        };
+        perguntas.add(
+            new MultipleChoiceQuestion(
+                "Qual destas palavras em inglês representa uma cor?",
+                "c",
+                2,
+                alternativasM24
+            )
+        );
+
+        String[] alternativasM25 = {
+            "a) Feliz",
+            "b) Alegre",
+            "c) Contente",
+            "d) Triste"
+        };
+        perguntas.add(
+            new MultipleChoiceQuestion(
+                "Qual palavra é antônimo de 'feliz'?",
+                "d",
+                2,
+                alternativasM25
+            )
+        );
+
         /*Múltipla Escolha - Difícil (Ensino Médio)*/
-        String[] alternativasD21 = {
+        String[] alternativasD26 = {
             "a) Mitocôndria",
             "b) Ribossomo",
             "c) Núcleo",
@@ -335,11 +410,11 @@ public class QuestionBank {
                 "Qual organela celular é responsável pela produção da maior parte da energia utilizada pela célula?",
                 "a",
                 3,
-                alternativasD21
+                alternativasD26
             )
         );
 
-        String[] alternativasD22 = {
+        String[] alternativasD27 = {
             "a) Isaac Newton",
             "b) Galileu Galilei",
             "c) Albert Einstein",
@@ -350,11 +425,11 @@ public class QuestionBank {
                 "Quem formulou a Teoria da Relatividade?",
                 "c",
                 3,
-                alternativasD22
+                alternativasD27
             )
         );
 
-        String[] alternativasD23 = {
+        String[] alternativasD28 = {
             "a) Na",
             "b) N",
             "c) Ne",
@@ -365,11 +440,11 @@ public class QuestionBank {
                 "Qual é o símbolo químico do elemento Nitrogênio?",
                 "b",
                 3,
-                alternativasD23
+                alternativasD28
             )
         );
 
-        String[] alternativasD24 = {
+        String[] alternativasD29 = {
             "a) 12",
             "b) 10",
             "c) 8",
@@ -380,11 +455,11 @@ public class QuestionBank {
                 "Qual é o valor de x na equação 2x + 4 = 20?",
                 "c",
                 3,
-                alternativasD24
+                alternativasD29
             )
         );
 
-        String[] alternativasD25 = {
+        String[] alternativasD30 = {
             "a) Revolução Francesa",
             "b) Revolução Industrial",
             "c) Guerra Fria",
@@ -395,11 +470,11 @@ public class QuestionBank {
                 "Qual acontecimento histórico teve início em 1789?",
                 "a",
                 3,
-                alternativasD25
+                alternativasD30
             )
         );
 
-        String[] alternativasD26 = {
+        String[] alternativasD31 = {
             "a) Oceania",
             "b) Europa",
             "c) Ásia",
@@ -410,11 +485,11 @@ public class QuestionBank {
                 "Qual é o maior continente em extensão territorial?",
                 "c",
                 3,
-                alternativasD26
+                alternativasD31
             )
         );
 
-        String[] alternativasD27 = {
+        String[] alternativasD32 = {
             "a) Machado de Assis",
             "b) Carlos Drummond de Andrade",
             "c) José de Alencar",
@@ -425,11 +500,11 @@ public class QuestionBank {
                 "Quem escreveu a obra 'Memórias Póstumas de Brás Cubas'?",
                 "a",
                 3,
-                alternativasD27
+                alternativasD32
             )
         );
 
-        String[] alternativasD28 = {
+        String[] alternativasD33 = {
             "a) 9,8 m/s²",
             "b) 5 m/s²",
             "c) 20 m/s²",
@@ -440,11 +515,11 @@ public class QuestionBank {
                 "Qual é aproximadamente o valor da aceleração da gravidade na superfície da Terra?",
                 "a",
                 3,
-                alternativasD28
+                alternativasD33
             )
         );
 
-        String[] alternativasD29 = {
+        String[] alternativasD34 = {
             "a) CPU",
             "b) RAM",
             "c) SSD",
@@ -455,11 +530,11 @@ public class QuestionBank {
                 "Qual componente é responsável por executar instruções e realizar cálculos em um computador?",
                 "a",
                 3,
-                alternativasD29
+                alternativasD34
             )
         );
 
-        String[] alternativasD30 = {
+        String[] alternativasD35 = {
             "a) HCl",
             "b) NaCl",
             "c) H2SO4",
@@ -470,7 +545,82 @@ public class QuestionBank {
                 "Qual composto químico é conhecido popularmente como sal de cozinha?",
                 "b",
                 3,
-                alternativasD30
+                alternativasD35
+            )
+        );
+
+                String[] alternativasD36 = {
+            "a) Barroco",
+            "b) Arcadismo",
+            "c) Realismo",
+            "d) Modernismo"
+        };
+        perguntas.add(
+            new MultipleChoiceQuestion(
+                "A obra 'Memórias Póstumas de Brás Cubas' pertence principalmente a qual movimento literário?",
+                "c",
+                3,
+                alternativasD36
+            )
+        );
+
+        String[] alternativasD37 = {
+            "a) Simple Present",
+            "b) Present Continuous",
+            "c) Present Perfect",
+            "d) Simple Past"
+        };
+        perguntas.add(
+            new MultipleChoiceQuestion(
+                "Na frase 'She has studied English for years', qual tempo verbal é utilizado?",
+                "c",
+                3,
+                alternativasD37
+            )
+        );
+
+        String[] alternativasD38 = {
+            "a) Metáfora",
+            "b) Hipérbole",
+            "c) Eufemismo",
+            "d) Antítese"
+        };
+        perguntas.add(
+            new MultipleChoiceQuestion(
+                "Na frase 'Ele chorou rios de lágrimas', qual figura de linguagem aparece?",
+                "b",
+                3,
+                alternativasD38
+            )
+        );
+
+        String[] alternativasD39 = {
+            "a) Acento diferencial",
+            "b) Crase",
+            "c) Concordância verbal",
+            "d) Regência nominal"
+        };
+        perguntas.add(
+            new MultipleChoiceQuestion(
+                "Em 'Vou à escola', o uso do acento grave indica qual fenômeno gramatical?",
+                "b",
+                3,
+                alternativasD39
+            )
+        );
+
+        String[] alternativasD40 = {
+            "a) Actually",
+            "b) Library",
+            "c) College",
+            "d) Pretend"
+        };
+        perguntas.add(
+            new MultipleChoiceQuestion(
+                "Qual palavra em inglês é considerada um falso cognato, podendo ser confundida com 'atualmente'?",
+                "a",
+                3,
+                alternativasD40
             )
         );
 
@@ -636,6 +786,46 @@ public class QuestionBank {
             )
         );
 
+        perguntas.add(
+            new TrueFalseQuestion(
+                "Em português, substantivos podem nomear pessoas, lugares, objetos, sentimentos ou ideias.",
+                "V",
+                2
+            )
+        );
+
+        perguntas.add(
+            new TrueFalseQuestion(
+                "Em inglês, a palavra 'teacher' significa professor ou professora.",
+                "V",
+                2
+            )
+        );
+
+        perguntas.add(
+            new TrueFalseQuestion(
+                "Na frase 'Eles estudam todos os dias', a palavra 'estudam' é um verbo.",
+                "V",
+                2
+            )
+        );
+
+        perguntas.add(
+            new TrueFalseQuestion(
+                "Em inglês, o plural regular de muitos substantivos é formado com o acréscimo de 's'.",
+                "V",
+                2
+            )
+        );
+
+        perguntas.add(
+            new TrueFalseQuestion(
+                "A palavra 'jogador' é um verbo.",
+                "F",
+                2
+            )
+        );
+
         /*Verdadeiro ou Falso - Difícil (Ensino Médio)*/
         perguntas.add(
             new TrueFalseQuestion(
@@ -717,8 +907,48 @@ public class QuestionBank {
             )
         );
 
+                perguntas.add(
+            new TrueFalseQuestion(
+                "A crase ocorre, em muitos casos, pela fusão da preposição 'a' com o artigo definido feminino 'a'.",
+                "V",
+                3
+            )
+        );
+
+        perguntas.add(
+            new TrueFalseQuestion(
+                "Na voz ativa, o sujeito sofre a ação verbal.",
+                "F",
+                3
+            )
+        );
+
+        perguntas.add(
+            new TrueFalseQuestion(
+                "Em inglês, 'actually' significa sempre 'atualmente'.",
+                "F",
+                3
+            )
+        );
+
+        perguntas.add(
+            new TrueFalseQuestion(
+                "O modo subjuntivo pode expressar hipótese, dúvida ou possibilidade.",
+                "V",
+                3
+            )
+        );
+
+        perguntas.add(
+            new TrueFalseQuestion(
+                "A função metalinguística ocorre quando a linguagem é usada para explicar a própria linguagem.",
+                "V",
+                3
+            )
+        );
+
         /*Múltiplas Respostas - Fácil (Fundamental I)*/
-        String[] alternativasF61 = {
+        String[] alternativasF81 = {
             "a) Cachorro",
             "b) Gato",
             "c) Pedra",
@@ -729,11 +959,11 @@ public class QuestionBank {
                 "Quais destes são animais?",
                 "a,b,d",
                 1,
-                alternativasF61
+                alternativasF81
             )
         );
 
-        String[] alternativasF62 = {
+        String[] alternativasF82 = {
             "a) Vermelho",
             "b) Azul",
             "c) Elefante",
@@ -744,11 +974,11 @@ public class QuestionBank {
                 "Quais destas opções são cores?",
                 "a,b,d",
                 1,
-                alternativasF62
+                alternativasF82
             )
         );
 
-        String[] alternativasF63 = {
+        String[] alternativasF83 = {
             "a) Janeiro",
             "b) Fevereiro",
             "c) Julio",
@@ -759,11 +989,11 @@ public class QuestionBank {
                 "Quais destas opções são meses do ano?",
                 "a,b,d",
                 1,
-                alternativasF63
+                alternativasF83
             )
         );
 
-        String[] alternativasF64 = {
+        String[] alternativasF84 = {
             "a) Olhos",
             "b) Orelhas",
             "c) Boca",
@@ -774,11 +1004,11 @@ public class QuestionBank {
                 "Quais destas partes pertencem ao corpo humano?",
                 "a,b,c",
                 1,
-                alternativasF64
+                alternativasF84
             )
         );
 
-        String[] alternativasF65 = {
+        String[] alternativasF85 = {
             "a) Maçã",
             "b) Banana",
             "c) Cenoura",
@@ -789,11 +1019,11 @@ public class QuestionBank {
                 "Quais destas opções são alimentos?",
                 "a,b,c",
                 1,
-                alternativasF65
+                alternativasF85
             )
         );
 
-        String[] alternativasF66 = {
+        String[] alternativasF86 = {
             "a) Minhoca",
             "b) Lua",
             "c) Estrela",
@@ -804,11 +1034,11 @@ public class QuestionBank {
                 "Quais destes corpos podem ser observados no céu?",
                 "b,c",
                 1,
-                alternativasF66
+                alternativasF86
             )
         );
 
-        String[] alternativasF67 = {
+        String[] alternativasF87 = {
             "a) Adição",
             "b) Subtração",
             "c) Multiplicação",
@@ -819,11 +1049,11 @@ public class QuestionBank {
                 "Quais destas opções representam operações matemáticas?",
                 "a,b,c",
                 1,
-                alternativasF67
+                alternativasF87
             )
         );
 
-        String[] alternativasF68 = {
+        String[] alternativasF88 = {
             "a) Brasil",
             "b) Madrid",
             "c) Pernambuco",
@@ -834,11 +1064,11 @@ public class QuestionBank {
                 "Quais destes são países?",
                 "a,d",
                 1,
-                alternativasF68
+                alternativasF88
             )
         );
 
-        String[] alternativasF69 = {
+        String[] alternativasF89 = {
             "a) Leão",
             "b) Tigre",
             "c) Árvore",
@@ -849,11 +1079,11 @@ public class QuestionBank {
                 "Quais destes são animais selvagens?",
                 "a,b",
                 1,
-                alternativasF69
+                alternativasF89
             )
         );
 
-        String[] alternativasF70 = {
+        String[] alternativasF90 = {
             "a) Quadrado",
             "b) Panela",
             "c) Círculo",
@@ -864,12 +1094,12 @@ public class QuestionBank {
                 "Quais destas opções são figuras geométricas?",
                 "a,c",
                 1,
-                alternativasF70
+                alternativasF90
             )
         );
 
         /*Múltiplas Respostas - Médio (Fundamental II)*/
-        String[] alternativasM71 = {
+        String[] alternativasM91 = {
             "a) Mercúrio",
             "b) Marte",
             "c) Vênus",
@@ -880,11 +1110,11 @@ public class QuestionBank {
                 "Quais destes são planetas rochosos do Sistema Solar?",
                 "a,b,c",
                 2,
-                alternativasM71
+                alternativasM91
             )
         );
 
-        String[] alternativasM72 = {
+        String[] alternativasM92 = {
             "a) Oxigênio",
             "b) Hidrogênio",
             "c) Água",
@@ -895,11 +1125,11 @@ public class QuestionBank {
                 "Quais destas opções são elementos químicos?",
                 "a,b",
                 2,
-                alternativasM72
+                alternativasM92
             )
         );
 
-        String[] alternativasM73 = {
+        String[] alternativasM93 = {
             "a) Equador",
             "b) Venezuela",
             "c) Argentina",
@@ -910,11 +1140,11 @@ public class QuestionBank {
                 "Quais destes países fazem fronteira com o Brasil?",
                 "b,c",
                 2,
-                alternativasM73
+                alternativasM93
             )
         );
 
-        String[] alternativasM74 = {
+        String[] alternativasM94 = {
             "a) Exponenciação",
             "b) Divisão",
             "c) Fotossíntese",
@@ -925,11 +1155,11 @@ public class QuestionBank {
                 "Quais destas opções representam operações matemáticas?",
                 "a,b,d",
                 2,
-                alternativasM74
+                alternativasM94
             )
         );
 
-        String[] alternativasM75 = {
+        String[] alternativasM95 = {
             "a) Cnidários",
             "b) Répteis",
             "c) Anfíbios",
@@ -940,11 +1170,11 @@ public class QuestionBank {
                 "Quais destes grupos pertencem à classificação dos animais vertebrados?",
                 "b,c",
                 2,
-                alternativasM75
+                alternativasM95
             )
         );
 
-        String[] alternativasM76 = {
+        String[] alternativasM96 = {
             "a) Dom Pedro I",
             "b) Tiradentes",
             "c) Pedro Álvares Cabral",
@@ -955,11 +1185,11 @@ public class QuestionBank {
                 "Quais destes personagens fazem parte da História do Brasil Colonial ou Imperial?",
                 "a,b,c",
                 2,
-                alternativasM76
+                alternativasM96
             )
         );
 
-        String[] alternativasM77 = {
+        String[] alternativasM97 = {
             "a) Pepsina",
             "b) Amilase",
             "c) Pepsi",
@@ -970,11 +1200,11 @@ public class QuestionBank {
                 "Quais destas opções são enzimas?",
                 "a,b,d",
                 2,
-                alternativasM77
+                alternativasM97
             )
         );
 
-        String[] alternativasM78 = {
+        String[] alternativasM98 = {
             "a) África",
             "b) Ásia",
             "c) Oceania",
@@ -985,11 +1215,11 @@ public class QuestionBank {
                 "Quais destas opções são continentes?",
                 "a,b,c",
                 2,
-                alternativasM78
+                alternativasM98
             )
         );
 
-        String[] alternativasM79 = {
+        String[] alternativasM99 = {
             "a) Pulmões",
             "b) Coração",
             "c) Pele",
@@ -1000,11 +1230,11 @@ public class QuestionBank {
                 "Quais destes órgãos fazem parte do corpo humano?",
                 "a,b,c",
                 2,
-                alternativasM79
+                alternativasM99
             )
         );
 
-        String[] alternativasM80 = {
+        String[] alternativasM100 = {
             "a) Fotossíntese",
             "b) Respiração",
             "c) Digestão",
@@ -1015,12 +1245,86 @@ public class QuestionBank {
                 "Quais destes processos ocorrem em seres vivos?",
                 "a,b,c",
                 2,
-                alternativasM80
+                alternativasM100
+            )
+        );
+        String[] alternativasM101 = {
+            "a) Estrelado",
+            "b) Escola",
+            "c) Frequentemente",
+            "d) Cidade"
+        };
+        perguntas.add(
+            new MultipleAnswerQuestion(
+                "Quais destas palavras são substantivos?",
+                "b,d",
+                2,
+                alternativasM101
+            )
+        );
+
+        String[] alternativasM102 = {
+            "a) Red",
+            "b) Blue",
+            "c) Chair",
+            "d) Green"
+        };
+        perguntas.add(
+            new MultipleAnswerQuestion(
+                "Quais destas palavras em inglês representam cores?",
+                "a,b,d",
+                2,
+                alternativasM102
+            )
+        );
+
+        String[] alternativasM103 = {
+            "a) Cantando",
+            "b) Estudar",
+            "c) Dorme",
+            "d) Dormir"
+        };
+        perguntas.add(
+            new MultipleAnswerQuestion(
+                "Quais destas palavras são verbos no infinitivo?",
+                "b,d",
+                2,
+                alternativasM103
+            )
+        );
+
+        String[] alternativasM104 = {
+            "a) I",
+            "b) You",
+            "c) They",
+            "d) There"
+        };
+        perguntas.add(
+            new MultipleAnswerQuestion(
+                "Quais destas palavras são pronomes pessoais em inglês?",
+                "a,b,c",
+                2,
+                alternativasM104
+            )
+        );
+
+        String[] alternativasM105 = {
+            "a) Mas",
+            "b) Porém",
+            "c) Entretanto",
+            "d) Portanto"
+        };
+        perguntas.add(
+            new MultipleAnswerQuestion(
+                "Quais destas palavras podem funcionar como conectivos de oposição?",
+                "a,b,c",
+                2,
+                alternativasM105
             )
         );
 
         /*Múltiplas Respostas - Difícil (Ensino Médio)*/
-        String[] alternativas81 = {
+        String[] alternativas106 = {
             "a) Oxigênio",
             "b) Hidrogênio",
             "c) Carbono",
@@ -1031,11 +1335,11 @@ public class QuestionBank {
                 "Quais elementos estão presentes na molécula de glicose (C6H12O6)?",
                 "a,b,c",
                 3,
-                alternativas81
+                alternativas106
             )
         );
 
-        String[] alternativas82 = {
+        String[] alternativas107 = {
             "a) Parábola",
             "b) Elipse",
             "c) Circunferência",
@@ -1046,11 +1350,11 @@ public class QuestionBank {
                 "Quais são exemplos de seções cônicas?",
                 "a,b,c,d",
                 3,
-                alternativas82
+                alternativas107
             )
         );
 
-        String[] alternativas83 = {
+        String[] alternativas108 = {
             "a) Mitose",
             "b) Meiose",
             "c) Fecundação",
@@ -1061,11 +1365,11 @@ public class QuestionBank {
                 "Quais processos envolvem divisão celular?",
                 "a,b",
                 3,
-                alternativas83
+                alternativas108
             )
         );
 
-        String[] alternativas84 = {
+        String[] alternativas109 = {
             "a) Brasil",
             "b) Rússia",
             "c) Índia",
@@ -1076,11 +1380,11 @@ public class QuestionBank {
                 "Quais países fazem parte do grupo BRICS desde sua formação original?",
                 "a,b,c,d",
                 3,
-                alternativas84
+                alternativas109
             )
         );
 
-        String[] alternativas85 = {
+        String[] alternativas110 = {
             "a) Júpiter",
             "b) Vênus",
             "c) Saturno",
@@ -1091,11 +1395,11 @@ public class QuestionBank {
                 "Quais planetas são classificados como planetas gasosos?",
                 "a,c,d",
                 3,
-                alternativas85
+                alternativas110
             )
         );
 
-        String[] alternativas86 = {
+        String[] alternativas111 = {
             "a) Seno",
             "b) Cosseno",
             "c) Tangente",
@@ -1106,11 +1410,11 @@ public class QuestionBank {
                 "Quais são funções trigonométricas básicas?",
                 "a,b,c",
                 3,
-                alternativas86
+                alternativas111
             )
         );
 
-        String[] alternativas87 = {
+        String[] alternativas112 = {
             "a) Fotossíntese",
             "b) Respiração celular",
             "c) Fermentação",
@@ -1121,11 +1425,11 @@ public class QuestionBank {
                 "Quais processos produzem energia para as células?",
                 "b,c",
                 3,
-                alternativas87
+                alternativas112
             )
         );
 
-        String[] alternativas88 = {
+        String[] alternativas113 = {
             "a) Newton",
             "b) Joule",
             "c) Watt",
@@ -1136,11 +1440,11 @@ public class QuestionBank {
                 "Quais são unidades derivadas do Sistema Internacional de Unidades (SI)?",
                 "a,b,c",
                 3,
-                alternativas88
+                alternativas113
             )
         );
 
-        String[] alternativas89 = {
+        String[] alternativas114 = {
             "a) Dom Casmurro",
             "b) Memórias Póstumas de Brás Cubas",
             "c) O Cortiço",
@@ -1151,11 +1455,11 @@ public class QuestionBank {
                 "Quais obras foram escritas por Machado de Assis?",
                 "a,b",
                 3,
-                alternativas89
+                alternativas114
             )
         );
 
-        String[] alternativas90 = {
+        String[] alternativas115 = {
             "a) ATP",
             "b) DNA",
             "c) RNA",
@@ -1166,7 +1470,82 @@ public class QuestionBank {
                 "Quais das opções contêm fósforo em sua estrutura?",
                 "a,b,c,d",
                 3,
-                alternativas90
+                alternativas115
+            )
+        );
+
+                String[] alternativasD116 = {
+            "a) Metáfora",
+            "b) Hipérbole",
+            "c) Ironia",
+            "d) Comparação"
+        };
+        perguntas.add(
+            new MultipleAnswerQuestion(
+                "Quais destas opções são figuras de linguagem?",
+                "a,b,c,d",
+                3,
+                alternativasD116
+            )
+        );
+
+        String[] alternativasD117 = {
+            "a) Actually",
+            "b) Pretend",
+            "c) Library",
+            "d) House"
+        };
+        perguntas.add(
+            new MultipleAnswerQuestion(
+                "Quais destas palavras em inglês podem ser consideradas falsos cognatos para falantes de português?",
+                "a,b,c",
+                3,
+                alternativasD117
+            )
+        );
+
+        String[] alternativasD118 = {
+            "a) Realismo",
+            "b) Romantismo",
+            "c) Modernismo",
+            "d) Fototropismo"
+        };
+        perguntas.add(
+            new MultipleAnswerQuestion(
+                "Quais destas opções são movimentos literários?",
+                "a,b,c",
+                3,
+                alternativasD118
+            )
+        );
+
+        String[] alternativasD119 = {
+            "a) Present Perfect",
+            "b) Simple Past",
+            "c) Future with will",
+            "d) Predicate"
+        };
+        perguntas.add(
+            new MultipleAnswerQuestion(
+                "Quais destas opções representam tempos ou estruturas verbais em inglês?",
+                "a,b,c",
+                3,
+                alternativasD119
+            )
+        );
+
+        String[] alternativasD120 = {
+            "a) Sujeito",
+            "b) Predicado",
+            "c) Objeto direto",
+            "d) Advérbio"
+        };
+        perguntas.add(
+            new MultipleAnswerQuestion(
+                "Quais destas opções são termos estudados na análise sintática?",
+                "a,b,c",
+                3,
+                alternativasD120
             )
         );
     }

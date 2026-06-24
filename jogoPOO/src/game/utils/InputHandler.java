@@ -54,7 +54,7 @@ public class InputHandler {
 
     //Imprime uma linha divisória para deixar o console mais organizado
     public void imprimirLinha() {
-        System.out.println("--------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
     }
 
     // Fecha o scanner quando o jogo acabar

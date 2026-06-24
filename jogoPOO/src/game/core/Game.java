@@ -45,17 +45,17 @@ public class Game {
         Player jogador = new Player(nome, personagemEscolhido);
 
         //criação das fases
-        Level fase1 = new Level("Fase 1", new Enemy(new VilaoF1()));
-        Level fase2 = new Level("Fase 2", new Enemy(new VilaoF2()));
-        Level fase3 = new Level("Fase 3", new Enemy(new VilaoF3()));
-        Level faseFinal = new Level("Fase Final", new Enemy(new VilaoBoss()), true); //única fase que tem perguntas cronometradas
+        Level fase1 = new Level("FASE 1", new Enemy(new VilaoF1()), 1); //fáceis cronometradas
+        Level fase2 = new Level("FASE 2", new Enemy(new VilaoF2()), 2); //médias cronometradas
+        Level fase3 = new Level("FASE 3", new Enemy(new VilaoF3()), 3); //difíceis cronometradas
+        Level faseFinal = new Level("FASE FINAL", new Enemy(new VilaoBoss()), true); //única fase completamente cronometrada
 
         //carregar perguntas nas fases (todas vêm do mesmo banco, mas as fases recebem perguntas diferentes)
         try {
-            carregarPerguntas(fase1, bancoDePerguntas, 10, 6, 4);
-            carregarPerguntas(fase2, bancoDePerguntas, 6, 10, 4);
-            carregarPerguntas(fase3, bancoDePerguntas, 4, 6, 10);
-            carregarPerguntas(faseFinal, bancoDePerguntas, 2, 8, 10);
+            carregarPerguntas(fase1, bancoDePerguntas, 8, 8, 4);
+            carregarPerguntas(fase2, bancoDePerguntas, 4, 10, 6);
+            carregarPerguntas(fase3, bancoDePerguntas, 4, 4, 12);
+            carregarPerguntas(faseFinal, bancoDePerguntas, 2, 6, 12);
 
         } catch (PerguntaIndisponivelException e) {
             input.imprimirLinha();
@@ -112,10 +112,10 @@ public class Game {
         }
         if (venceu){
             input.imprimirLinha();
-            System.out.println("VITÓRIA! Você derrotou o vilão akumatizado!\n");
-            System.out.println("Checkpoint concluído: " + fase.getNome());
-            System.out.println("Pontuação da fase: " + score.getPontuacaoFase());
-            System.out.println("Pontuação total: " + score.getPontuacaoTotal());
+            System.out.println("\t\t\t\t\t\t\t\t\tVITÓRIA! Você derrotou o vilão akumatizado!\n");
+            System.out.println("\t\t\t\t\t\t\t\tCheckpoint concluído: " + fase.getNome());
+            System.out.println("\t\t\t\t\t\t\t\tPontuação da fase: " + score.getPontuacaoFase());
+            System.out.println("\t\t\t\t\t\t\t\tPontuação total: " + score.getPontuacaoTotal());
             input.imprimirLinha();
         }
     }
@@ -132,24 +132,24 @@ public class Game {
     }
     private static void exibirTelaFinal(Player jogador, ScoreSystem score, GameStats stats, InputHandler input) {
         input.imprimirLinha();
-        System.out.println("        ZEROU! MISSÃO CONCLUÍDA!");
+        System.out.println("\t\t\t\t\t\t\t\t\tZEROU! MISSÃO CONCLUÍDA!");
         input.imprimirLinha();
         System.out.println();
-        System.out.println("Herói: " + jogador.getPersonagemSelecionado().getNomePersonagem());
-        System.out.println("Jogador(a): " + jogador.getNomeUsuario());
+        System.out.println("\t\t\t\t\t\t\t\tHerói: " + jogador.getPersonagemSelecionado().getNomePersonagem());
+        System.out.println("\t\t\t\t\t\t\t\tJogador(a): " + jogador.getNomeUsuario());
         System.out.println();
-        System.out.println("Pontuação total: " + score.getPontuacaoTotal());
+        System.out.println("\t\t\t\t\t\t\t\tPontuação total: " + score.getPontuacaoTotal());
         System.out.println();
-        System.out.println("Fases concluídas: " + stats.getFasesConcluidas());
-        System.out.println("Vilões derrotados: " + stats.getFasesConcluidas());
-        System.out.println("Tentativas totais: " + stats.getTentativas());
+        System.out.println("\t\t\t\t\t\t\t\tFases concluídas: " + stats.getFasesConcluidas());
+        System.out.println("\t\t\t\t\t\t\t\tVilões derrotados: " + stats.getFasesConcluidas());
+        System.out.println("\t\t\t\t\t\t\t\tTentativas totais: " + stats.getTentativas());
         System.out.println();
-        System.out.println("Perguntas respondidas: " + stats.getPerguntasRespondidas());
-        System.out.println("Acertos: " + stats.getAcertos());
-        System.out.println("Erros: " + stats.getErros());
-        System.out.printf("Taxa de acerto: %.2f%%\n", stats.calcularTaxaAcerto());
+        System.out.println("\t\t\t\t\t\t\t\tPerguntas respondidas: " + stats.getPerguntasRespondidas());
+        System.out.println("\t\t\t\t\t\t\t\tAcertos: " + stats.getAcertos());
+        System.out.println("\t\t\t\t\t\t\t\tErros: " + stats.getErros());
+        System.out.printf("\t\t\t\t\t\t\t\tTaxa de acerto: %.2f%%\n", stats.calcularTaxaAcerto());
         System.out.println();
-        System.out.println("Parabéns! Você zerou o jogo!");
+        System.out.println("\t\t\t\t\t\t\t\t\t\tParabéns! Você zerou o jogo!");
         input.imprimirLinha();
     }
 }

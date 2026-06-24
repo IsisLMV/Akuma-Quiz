@@ -5,6 +5,6 @@ package game.characters;
 public class VilaoF2 extends Character {
     //construtor
     public VilaoF2() {
-        super("Vilão F2", 1200, 220, 50);
+        super("Vilão F2", 1200, 210, 50);
     }
 }

@@ -5,7 +5,7 @@ import game.characters.Enemy;
 
 public class DoubleDamageAbility extends Ability {
     public DoubleDamageAbility() {
-        super("Cataclismo (Dobrar Dano)", 1); // 1 uso (é muito forte)
+        super("Cataclismo (Dobrar Dano)", 1); // 1 uso (é MUITO forte)
     }
 
     @Override

@@ -13,7 +13,8 @@ public class Level {
     /*atributos*/
     private String nomeFase;
     private Enemy vilao;
-    private boolean perguntasCronometradas;
+    private int dificuldadeCronometrada;
+    private boolean todasCronometradas;
     //cópias das listas inalteradas para ajudar no reset da fase em caso de derrota
     private List<Question> todasFaceis;
     private List<Question> todasMedias;
@@ -28,15 +29,24 @@ public class Level {
     private int dificeisUsadas;
 
     /*construtores*/
-    //padrão: fases comuns
+    //fase sem cronômetro
     public Level(String nomeFase, Enemy vilao) {
-        this(nomeFase, vilao, false);
+        this(nomeFase, vilao, 0, false);
     }
-    //fase final (inclusão do cronômetro)
-    public Level(String nomeFase, Enemy vilao, boolean perguntasCronometradas) {
+    //fases comuns -> apenas uma dificuldade cronometrada
+    public Level(String nomeFase, Enemy vilao, int dificuldadeCronometrada) {
+        this(nomeFase, vilao, dificuldadeCronometrada, false);
+    }
+    //fase final -> inclusão do cronômetro em todas as perguntas
+    public Level(String nomeFase, Enemy vilao, boolean todasCronometradas) {
+        this(nomeFase, vilao, 0, todasCronometradas);
+    }
+    //padrão comum
+    public Level(String nomeFase, Enemy vilao, int dificuldadeCronometrada, boolean todasCronometradas) {
         this.nomeFase = nomeFase;
         this.vilao = vilao;
-        this.perguntasCronometradas = perguntasCronometradas;
+        this.dificuldadeCronometrada = dificuldadeCronometrada;
+        this.todasCronometradas = todasCronometradas;
         this.todasFaceis = new ArrayList<>();
         this.todasMedias = new ArrayList<>();
         this.todasDificeis = new ArrayList<>();
@@ -72,7 +82,11 @@ public class Level {
     }
 
     private Question prepararPergunta(Question pergunta) {
-        if (perguntasCronometradas) {
+        //fase 1 = fáceis cronometradas
+        //fase 2 = médias cronometradas
+        //fase 3 = difíceis cronometradas
+        //fase final = todas cronometradas
+        if (todasCronometradas || (pergunta.getDificuldade() == dificuldadeCronometrada)) {
             pergunta.ativarTempo();
         }
 
@@ -121,21 +135,21 @@ public class Level {
 
     //método essêncial para diferenciar as fases (cada uma tem uma proporção diferente)
     public Question getProximaPergunta() {
-        //fase 1: 10 fáceis, 6 médias, 4 difíceis
-        if (nomeFase.equals("Fase 1")) {
-            return selecionarPorRegra(10, 6, 4);
+        //fase 1: 8 fáceis, 8 médias, 4 difíceis
+        if (nomeFase.equals("FASE 1")) {
+            return selecionarPorRegra(8, 8, 4);
         }
-        //fase 2: 6 fáceis, 10 médias, 4 difíceis
-        if (nomeFase.equals("Fase 2")) {
-            return selecionarPorRegra(6, 10, 4);
+        //fase 2: 4 fáceis, 10 médias, 6 difíceis
+        if (nomeFase.equals("FASE 2")) {
+            return selecionarPorRegra(4, 10, 6);
         }
-        //fase 3: 4 fáceis, 6 médias, 10 difíceis
-        if (nomeFase.equals("Fase 3")) {
-            return selecionarPorRegra(4, 6, 10);
+        //fase 3: 4 fáceis, 4 médias, 12 difíceis
+        if (nomeFase.equals("FASE 3")) {
+            return selecionarPorRegra(4, 4, 12);
         }
-        //fase final: 2 fácil, 8 médias, 10 difíceis
-        if (nomeFase.equals("Fase Final")) {
-            return selecionarPorRegra(2, 8, 10);
+        //fase final: 2 fácil, 6 médias, 12 difíceis
+        if (nomeFase.equals("FASE FINAL")) {
+            return selecionarPorRegra(2, 6, 12);
         }
         return null;
     }

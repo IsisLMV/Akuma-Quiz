@@ -24,7 +24,7 @@ public class BattleManager {
     }
 
     public ResultadoBatalha iniciarBatalha() {
-        System.out.println("\nBATALHA EM ANDAMENTO:\n" + fase.getNome() + ": " + jogador.getNomeUsuario() + " VS " + vilao.getPersonagem().getNomePersonagem());
+        System.out.println("\n\t\t\t\t\t\t\t\t\t=========== BATALHA EM ANDAMENTO ===========\n\n\t\t\t\t\t\t\t\t\t\t" + fase.getNome() + ": " + jogador.getNomeUsuario() + " VS " + vilao.getPersonagem().getNomePersonagem());
         
         //loop principal da batalha: continua as rodadas enquanto jogador estiver vivo (com resistência)
         while (jogador.getPersonagemSelecionado().estaVivo() && vilao.getPersonagem().estaVivo()) {
