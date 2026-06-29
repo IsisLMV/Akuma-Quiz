@@ -1,10 +1,12 @@
-# Jogo-LPOO-nomeProvisorio-
+# Akuma Quiz
 
 Projeto desenvolvido para a disciplina de Linguagem de Programação Orientada a Objetos.
 
-O projeto consiste em um jogo de quiz com batalhas em turnos, inspirado na série Miraculous: As Aventuras de Ladybug. Nele, o jogador escolhe um herói, responde perguntas e enfrenta vilões em diferentes fases. Cada resposta influencia diretamente a batalha: ao acertar, o jogador ataca o inimigo; ao errar ou deixar o tempo acabar em perguntas cronometradas, o inimigo contra-ataca.
+O Akuma Quiz é um jogo de quiz com batalhas em turnos, inspirado na série Miraculous: As Aventuras de Ladybug. O jogador escolhe um herói, responde perguntas de diferentes dificuldades e enfrenta vilões ao longo de uma campanha dividida em fases. 
 
-A versão atual funciona por meio de interface textual no terminal. A implementação de uma interface gráfica foi considerada, mas ficou como possibilidade de melhoria futura devido ao tempo disponível para a entrega.
+Cada resposta influencia diretamente a batalha: ao acertar, o jogador ataca o inimigo; ao errar ou deixar o tempo acabar em perguntas cronometradas, o vilão contra-ataca. O jogo também possui habilidades especiais, sistema de pontuação, checkpoints, estatísticas finais e progressão gradual de dificuldade.
+
+A versão atual funciona por meio de interface textual no terminal. A implementação de uma interface gráfica foi considerada, mas ficou como possibilidade de melhoria pós-disciplina.
 
 **Este projeto possui finalidade exclusivamente acadêmica e não tem fins comerciais.*
 
@@ -39,11 +41,16 @@ java game.core.Game
 - Sistema de fases progressivas.
 - Sistema de batalhas por rodadas.
 - Sistema de pontuação por fase e pontuação total.
-- Banco de perguntas aleatórias baseadas em 3 níveis: Fundamental 1, Fundamental 2 e Ensino Médio.
+- Banco de perguntas aleatórias distribuídas em três níveis: Fundamental 1, Fundamental 2 e Ensino Médio.
 - Perguntas de múltipla escolha.
 - Perguntas de múltiplas respostas.
 - Perguntas de verdadeiro ou falso.
 - Perguntas com tempo limite.
+- Progressão de cronômetro por fase:
+		- Fase 1: perguntas fáceis cronometradas.
+		- Fase 2: perguntas médias cronometradas.
+		- Fase 3: perguntas difíceis cronometradas.
+		- Fase Final: todas as perguntas cronometradas.
 - Habilidades especiais exclusivas para cada personagem.
 - Sistema de tentativas/retry em caso de derrota (checkpoints).
 - Estatísticas finais da partida.
@@ -59,11 +66,11 @@ O projeto está organizado em pacotes (`packages`) com responsabilidades bem def
 
 Contém as classes responsáveis pelo funcionamento principal do jogo.
 
-- `Game` – ponto de entrada da aplicação e responsável pelo fluxo geral do jogo.
+- `Game` – ponto de entrada da aplicação, responsável pelo fluxo geral do jogo, contextualização inicial, criação do jogador, montagem das fases e exibição da tela final.
 - `BattleManager` – coordena a batalha de uma fase específica.
 - `Round` – controla a execução de uma rodada, incluindo pergunta, resposta, uso de habilidade e ataque.
-- `ScoreSystem` – gerencia a pontuação da fase e a pontuação total.
-- `Level` – representa uma fase do jogo, controlando vilão, perguntas e progressão de dificuldade.
+- `ScoreSystem` – gerencia a pontuação por fase e a pontuação total.
+- `Level` – representa uma fase do jogo, controlando vilão, perguntas, progressão de dificuldade, perguntas cronometradas e textos narrativos da fase.
 - `GameStats` – registra estatísticas da partida, como acertos, erros, tentativas e fases concluídas.
 - `ResultadoBatalha` – enumeração que representa os possíveis resultados de uma batalha.
 
@@ -132,9 +139,15 @@ O projeto foi desenvolvido seguindo os princípios da Programação Orientada a 
 
 A classe `Game` atua como ponto de entrada da aplicação, sendo responsável por inicializar os principais objetos do sistema, criar o jogador, montar as fases e controlar o fluxo geral da campanha.
 
+A classe `Round` representa uma rodada individual da batalha, sendo responsável por exibir a pergunta, permitir o uso de habilidades, validar respostas e aplicar os efeitos do acerto ou erro.
+
+O controle da pontuação foi separado na classe `ScoreSystem`, enquanto as estatísticas gerais da partida foram concentradas em `GameStats`. Essa separação torna o código mais organizado e facilita alterações futuras.
+
+A classe `Level` organiza as perguntas em fases, controla a progressão de dificuldade, define quais perguntas terão limite de tempo e armazena os textos narrativos de cada etapa da campanha. Dessa forma, cada fase possui identidade própria, vilão específico, distribuição de perguntas e regras de cronômetro.
+
 A classe `BattleManager` coordena a batalha de uma fase específica, interagindo com `Player`, `Enemy`, `Level`, `Round`, `ScoreSystem` e `GameStats`. Essa separação evita que toda a lógica do jogo fique concentrada em uma única classe.
 
-Para representar os personagens, foi utilizada uma hierarquia baseada na classe abstrata `Character`, que concentra atributos e comportamentos comuns, como vida, ataque, defesa, habilidade, cálculo de dano, recebimento de dano e estados temporários. As classes `Ladybug`, `CatNoir`, `Carapace`, `RenaRouge`, `Viperion`, `Vesperia` e os vilões especializam essa estrutura, aproveitando herança e polimorfismo.
+Para representar os personagens, foi utilizada uma hierarquia baseada na classe abstrata `Character`, que concentra atributos e comportamentos comuns, como vida, ataque, defesa, habilidade, cálculo de dano, recebimento de dano e estados temporários. As classes dos heróis e dos vilões especializam essa estrutura, aproveitando herança e polimorfismo.
 
 A criação dos personagens jogáveis foi centralizada na classe `CharacterFactory`, reduzindo o acoplamento entre a classe principal `Game` e as classes concretas dos personagens.
 
@@ -142,11 +155,7 @@ As habilidades foram modeladas a partir da classe abstrata `Ability`, que implem
 
 O sistema de perguntas foi modelado a partir da classe abstrata `Question`, especializada pelas classes `MultipleChoiceQuestion`, `MultipleAnswerQuestion` e `TrueFalseQuestion`. A interface `TimedQuestion` define o comportamento relacionado ao tempo limite, enquanto a própria classe `Question` controla se uma pergunta está ou não cronometrada. Dessa forma, não foi necessário criar uma classe separada para cada tipo de pergunta temporizada.
 
-A classe `QuestionBank` é responsável por armazenar as perguntas e fornecer questões aleatórias, inclusive por nível de dificuldade. Já a classe `Level` organiza as perguntas em fases, controla a progressão de dificuldade e define quais perguntas terão limite de tempo.
-
-A classe `Round` representa uma rodada individual da batalha, sendo responsável por exibir a pergunta, permitir o uso de habilidades, validar respostas e aplicar os efeitos do acerto ou erro.
-
-O controle da pontuação foi separado na classe `ScoreSystem`, enquanto as estatísticas gerais da partida foram concentradas em `GameStats`. Essa separação torna o código mais organizado e facilita alterações futuras.
+A classe `QuestionBank` é responsável por armazenar as perguntas e fornecer questões aleatórias, inclusive por nível de dificuldade.
 
 Para aumentar a robustez da aplicação, foram criadas exceções personalizadas, como `EntradaInvalidaException` e `PerguntaIndisponivelException`. A entrada de dados foi centralizada em `InputHandler`, evitando repetição de código e impedindo que o programa seja encerrado por entradas inválidas.
 
@@ -156,13 +165,13 @@ Essa organização favorece a clareza do código, facilita futuras extensões e 
 
 ## Limitações e Melhorias Futuras
 
-Devido ao tempo disponível para a entrega, o projeto foi finalizado com interface textual via terminal.
+Devido ao tempo disponível para as entregas da disciplina, o projeto foi finalizado com interface textual via terminal.
 Como melhorias futuras, podemos implementar:
 
 - Interface gráfica.
 - Novos personagens jogáveis.
 - Novas habilidades especiais.
-- Novos vilões.
+- Novos vilões/fases.
 - Novos tipos de perguntas.
 - Novos modos de jogo.
 - Sistema de loja de personagens ou power-ups.
@@ -318,6 +327,8 @@ Ability ..|> SpecialAbility
     Question <|-- MultipleAnswerQuestion
     Question <|-- TrueFalseQuestion
 
+	Question ..|> TimedQuestion
+
     class QuestionBank {
         - perguntas : ArrayList<Question>
 		- carregarPerguntas() void
@@ -344,7 +355,7 @@ Ability ..|> SpecialAbility
    		- score : ScoreSystem
    		- rodada : Round
 		- stats : GameStats
-        + iniciarBatalha() void
+        + iniciarBatalha() ResultadoBatalha
     }
 
     class Round {
@@ -358,6 +369,10 @@ Ability ..|> SpecialAbility
 	    - vilao : Enemy
 	    - dificuldadeCronometrada : int
 	    - todasCronometradas : boolean
+		- contexto : String
+	    - fraseMotivacional : String
+	    - fraseVitoria : String
+	    - fraseDerrota : String
 		- todasFaceis : List
 	    - todasMedias : List
 	    - todasDificeis : List
@@ -367,6 +382,7 @@ Ability ..|> SpecialAbility
 		- faceisUsadas : int
 	    - mediasUsadas : int
 	    - dificeisUsadas : int
+		- configurarNarrativa(nomeFase:String) void
 		+ reset() void
 		- prepararPergunta(pergunta:Question) Question
 	    + adicionarPergunta(pergunta:Question) void
