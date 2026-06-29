@@ -12,9 +12,20 @@ A versão atual funciona por meio de interface textual no terminal. A implementa
 
 ## Como executar
 
-Para executar o projeto, é necessário ter o Java instalado na máquina.
+### Requisitos
+Para executar o projeto, é necessário ter o Java instalado na máquina:
+ - JDK 11 ou superior instalado.
+ - Uma IDE compatível com Java, como VS Code, IntelliJ IDEA ou Eclipse.
 
-No terminal, a partir da pasta do projeto, acesse a pasta `src`:
+### Passos para execução - IDE
+- Baixe ou clone este repositório.
+- Abra a pasta do projeto em uma IDE, como VS Code ou IntelliJ IDEA.
+- Localize a classe principal: `jogoPOO/src/game/core/Game.java`
+- Execute o método `main` da classe `Game`.
+
+
+### Passos para execução - Terminal
+Também é possível executar pelo terminal, compilando os arquivos Java a partir da pasta src:
 
 ```bash
 cd jogoPOO/src
