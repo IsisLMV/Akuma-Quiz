@@ -29,7 +29,7 @@ public class Game {
 
         System.out.println("\nHawk Moth percebeu que a maior força dos portadores dos Miraculous não é apenas física, mas também mental.");
         System.out.println("Para derrotá-los de vez, ele elaborou um plano: akumatizar alguns cidadãos de Paris para corromper e congelar o conhecimento científico, histórico e educacional do mundo.");
-        System.out.println("Para restaurar a ordem, os heróis precisam provar que suas mentes continuam afiadas e que a sua disposição para aprender constantemente é maior do que qualquer magia sombria.\n");
+        System.out.println("Para restaurar a ordem, os heróis precisam provar que suas mentes continuam afiadas e que a sua disposição para aprender constantemente é maior do que qualquer poder sombrio.\n");
         input.imprimirLinha();
 
         System.out.println("\nChegou a sua hora de entrar em ação!\n");
