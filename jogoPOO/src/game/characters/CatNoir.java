@@ -5,7 +5,7 @@ import game.abilities.DoubleDamageAbility;
 public class CatNoir extends Character {
     //construtor
     public CatNoir() {
-        super("Cat Noir", 900, 300, 40);
+        super("Cat Noir", 900, 280, 40);
         this.habilidade = new DoubleDamageAbility();
     }
 }

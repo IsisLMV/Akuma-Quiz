@@ -1,10 +1,8 @@
-/*Placeholder pra entrega 3*/
-
 package game.characters;
 
 public class VilaoF3 extends Character {
     //construtor
     public VilaoF3() {
-        super("Vilão F3", 1650, 260, 75);
+        super("Faraó", 1650, 260, 75);
     }
 }
